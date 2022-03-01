@@ -1,5 +1,4 @@
-//import { initializeApp } from 'firebase/app';
-const initializeApp  = require ('firebase/app')
+import { initializeApp } from 'firebase/app';
 
 
 
