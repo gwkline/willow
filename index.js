@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, './website_assets/index.html'));
 });
 
+app.get('/login', (req, res) => {
+
+    res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
+});
+
 router.get('/login', (_, res) => {
     res.redirect( /*TODO: ADD FIREBASE AUTH FLOW*/ );
 });
