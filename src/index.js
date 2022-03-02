@@ -13,7 +13,7 @@ import {
 // Import the functions you need from the SDKs you need
 //import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js'
 import {initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword,createUserWithEmailAndPassword } from 'firebase/auth';
     // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 //import { analytics } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js'
 
@@ -42,14 +42,43 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(firebaseApp);
 connectAuthEmulator(auth, "http://localhost:9099");
-
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
 const loginEmailPassword = async () => {
     const loginEmail = txtEmail.value;
     const loginPassword = txtPassword.value;
 
-    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
+    try{
+        const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+        console.log(userCredential.user);
+     }
+     catch(error) {
+         console.log(error);
+         showLoginError(error);
+     }
 
+}
+
+btnLogin.addEventListener("click", loginEmailPassword);
+
+const createAccount = async () => {
+    try{
+        const userCredential = await createUserWithEmailAndPassword(auth, loginEmail, loginPassword);
+        console.log(userCredential.user);
+     }
+     catch(error) {
+         console.log(error);
+         showLoginError(error);
+     }
 }
 
 btnLogin.addEventListener("click", loginEmailPassword);
