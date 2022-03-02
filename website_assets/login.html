@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A Basic HTML5 Template</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="author" content="SitePoint">
+
+    <meta property="og:title" content="A Basic HTML5 Template">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+    <meta property="og:description" content="A simple HTML5 Template for new projects.">
+    <meta property="og:image" content="image.png">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+
+    <!-- Add your site or application content here -->
+
+    <!-- Add your site or application content here -->
+    <p>Login</p>
+    <!-- Button to open the modal login form -->
+    <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+
+    <!-- The Modal -->
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+        <!-- Modal Content -->
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+                <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+    <script src="js/vendor/modernizr-3.11.8.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
+    <script type="module">import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js' // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics import { analytics } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js'
+        // Add Firebase products that you want to use import { auth } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js' import { firestore } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js'</script>
+    <script type="module">// ... // TODO: Replace the following with your app's Firebase project configuration const firebaseConfig = { // ... }; // Initialize Firebase const app = initializeApp(firebaseConfig);</script>
+
+</body>
+
+</html>
