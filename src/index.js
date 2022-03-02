@@ -13,7 +13,7 @@ import {
 // Import the functions you need from the SDKs you need
 //import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js'
 import {initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword,createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword,createUserWithEmailAndPassword, signOut } from 'firebase/auth';
     // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 //import { analytics } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js'
 
@@ -39,7 +39,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
-
+btnLogin.addEventListener("click", loginEmailPassword);
 const auth = getAuth(firebaseApp);
 connectAuthEmulator(auth, "http://localhost:9099");
 createUserWithEmailAndPassword(auth, email, password)
@@ -71,6 +71,8 @@ const loginEmailPassword = async () => {
 btnLogin.addEventListener("click", loginEmailPassword);
 
 const createAccount = async () => {
+    const loginEmail = txtEmail.value;
+    const loginPassword = txtPassword.value;
     try{
         const userCredential = await createUserWithEmailAndPassword(auth, loginEmail, loginPassword);
         console.log(userCredential.user);
@@ -81,17 +83,33 @@ const createAccount = async () => {
      }
 }
 
-btnLogin.addEventListener("click", loginEmailPassword);
+
 //const db = getFirestore(firebaseApp);
 //db.collection('todos').getDocs();
 //const todosCol = collection(db, 'todos');
 //const snapshot = await getDocs(todosCol);
 
 //detect auth state
-onAuthStateChanged(auth, user => {
-    if(user != null) {
-        console.log('logged in!');
-    } else {
-        console.log('No user');
-    }
-});
+const monitorAuthState = async () => {
+    onAuthStateChanged(auth, user => {
+        if(user) {
+            console.log(user);
+            showApp();
+            showLoginState(user);
+
+            hideLoginError();
+        } else {
+            showLoginForm();
+            lblAuthState.innerHTML = "You're not logged in";
+            //console.log('No user');
+        }
+    });
+}
+
+monitorAuthState();
+
+const logout = async () => {
+    await signOut(auth);
+}
+
+btnLogout.addEventListener("click", logout);
