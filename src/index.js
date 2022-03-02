@@ -1,7 +1,19 @@
+import './style.css';
+import {
+    hideLoginError,
+    showLoginState,
+    showLoginForm,
+    showApp,
+    showLoginError,
+    btnLogin,
+    btnSignup,
+    btnLogout,
+    txtPassword
+} from './ui'
 // Import the functions you need from the SDKs you need
 //import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js'
 import {initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword } from 'firebase/auth';
     // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 //import { analytics } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js'
 
@@ -29,6 +41,18 @@ const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 
 const auth = getAuth(firebaseApp);
+connectAuthEmulator(auth, "http://localhost:9099");
+
+const loginEmailPassword = async () => {
+    const loginEmail = txtEmail.value;
+    const loginPassword = txtPassword.value;
+
+    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+    console.log(userCredential.user);
+
+}
+
+btnLogin.addEventListener("click", loginEmailPassword);
 //const db = getFirestore(firebaseApp);
 //db.collection('todos').getDocs();
 //const todosCol = collection(db, 'todos');
