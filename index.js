@@ -3,7 +3,6 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 const firebase = require('./firebase.js')
 
-const auth = firebase()
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +14,7 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 app.get('/', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './website_assets/index.html'));
+    res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
 });
 
 app.get('/login', (req, res) => {
