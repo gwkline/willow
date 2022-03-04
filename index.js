@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-const firebase = require('./firebase.js')
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,10 +25,3 @@ app.get('/home', (req, res) => {
 
     res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
 });
-
-
-
-router.get('/callback', catchAsync(async(req, res) => {
-
-
-}));
