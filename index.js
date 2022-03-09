@@ -20,3 +20,8 @@ app.get('/login', (req, res) => {
 
     res.status(200).sendFile(path.join(__dirname, './src/login.html'));
 });
+
+app.get('/login_test', (req, res) => {
+
+    res.status(200).sendFile(path.join(__dirname, './src/login_test.html'));
+});
