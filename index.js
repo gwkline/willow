@@ -18,10 +18,5 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './src/index.html'));
-});
-
-app.get('/home', (req, res) => {
-
-    res.status(200).sendFile(path.join(__dirname, './src/index.html'));
+    res.status(200).sendFile(path.join(__dirname, './src/login.html'));
 });
