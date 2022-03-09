@@ -13,7 +13,7 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 app.get('/', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './react/App.js'));
+    res.status(200).sendFile(path.join(__dirname, './react/app.js'));
 });
 
 app.get('/login', (req, res) => {
