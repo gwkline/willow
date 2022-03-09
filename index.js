@@ -13,15 +13,15 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 app.get('/', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
+    res.status(200).sendFile(path.join(__dirname, './website_assets/index.html'));
 });
 
 app.get('/login', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
+    res.status(200).sendFile(path.join(__dirname, './website_assets/index.html'));
 });
 
 app.get('/home', (req, res) => {
 
-    res.status(200).sendFile(path.join(__dirname, './website_assets/login.html'));
+    res.status(200).sendFile(path.join(__dirname, './website_assets/index.html'));
 });
