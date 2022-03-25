@@ -1,18 +1,23 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 50000
+let express = import('express')
+let path = import('path')
+let PORT = process.env.PORT || 50000
 
-const app = express();
+let app = express();
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './src/Dash/index.css';
+import App from './src/Dash/App.js';
+
+
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-require('./src/Dash/index.css');
-const App = require('./src/Dash/App');
+
 
 
 
