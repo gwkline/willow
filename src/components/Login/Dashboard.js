@@ -21,7 +21,7 @@ function Dashboard() {
   };
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
+    if (!user) return navigate("/register");
     fetchUserName();
   }, [user, loading]);
   return (
