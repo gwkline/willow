@@ -1,7 +1,7 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-require('./index.css');
-const App = require('./App');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-ReactDOM.render(App, document.getElementById('root'));
-console.log("working")
+ReactDOM.render( < App/>, document.getElementById('root'));
+console.log("fuck")

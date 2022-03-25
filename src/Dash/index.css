@@ -14,7 +14,7 @@ h1 {
   margin: 0rem;
 }
 
-card {
+.card {
   margin-top: 1rem;
   margin-left: 1rem;
   border-radius: 5px;
@@ -23,7 +23,7 @@ card {
   height: 30rem;
 }
 
-.header {
+header {
   text-align: center;
   background-color: white;
   border-radius: 0px;

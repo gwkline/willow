@@ -9,10 +9,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+const React = require('react');
+const ReactDOM = require('react-dom');
+require('./src/Dash/index.css');
+const App = require('./src/Dash/App');
+
+
+
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './src/Dash/index.html'));
+    ReactDOM.render(App, document.getElementById('root'));
+    //res.sendFile(path.join(__dirname, './src/Dash/index.html'));
 });
 
 app.get('/login', (req, res) => {
