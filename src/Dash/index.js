@@ -1,11 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+const React = require('react');
+const ReactDOM = require('react-dom');
+require('./index.css');
+const App = require('./App');
 
-ReactDOM.render( <
-    App / > , document.getElementById('root')
-);
-
-const domContainer = document.getElementByID('root');
-ReactDOM.render(e(LikeButton), domContainer);
+ReactDOM.render(App, document.getElementById('root'));
+console.log("working")
