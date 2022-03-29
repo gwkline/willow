@@ -31,10 +31,7 @@ const Navbar = () => {
             <NavLink to="/settings">
               Settings
             </NavLink>
-            <NavLink to="/dashboard">
-              Dashboard
-            </NavLink>
-            <NavLink to="/Account">
+            <NavLink to="/account">
               Account
             </NavLink>
           </NavMenu>
@@ -53,18 +50,6 @@ const Navbar = () => {
           <NavMenu>
             <NavLink to="/">
               Home
-            </NavLink>
-            <NavLink to="/createproject">
-              Create Project
-            </NavLink>
-            <NavLink to="/projects">
-              Projects
-            </NavLink>
-            <NavLink to="/Updates">
-              Updates
-            </NavLink>
-            <NavLink to="/settings">
-              Settings
             </NavLink>
             <NavLink to="/login">
               Login
