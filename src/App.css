@@ -1,16 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 * {
+  font-family: "comfortaa", cursive;
   box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
   margin: 3rem;
-  background-color: #dfdfdf;
+  background-color: #eeeeee;
 }
 
 h1, h2 {
-  color: #333333;
+  color: #2f3e46;
 }
 
 .btn {
@@ -38,12 +39,33 @@ h1, h2 {
   background-color: #f8dae9;
 }
 
+.create-proj-btn {
+  width: 200px;
+  height: 50px;
+  border-style: none;
+  background-color: #52796f;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  position: relative;
+}
+
 .card {
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   width: 20rem;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+  height: 80px;
+  background-color: #d9d9d9;
 }
 
 .actions {
@@ -71,4 +93,25 @@ h1, h2 {
   height: 100vh;
   top: 0;
   left: 0;
+}
+
+.proj-display {
+  font-size: 12px;
+  width: 700px;
+  padding: 10px;
+  background-color: #CAD2C5;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: lightgray;
+}
+
+.page-title {
+  display: inline-block;
+  width: 1100px;
+  text-align: left;
+}
+
+.title {
+  display: inline-flex;
+  align-items: left;
 }
