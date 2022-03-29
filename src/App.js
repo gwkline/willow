@@ -22,7 +22,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/updates" element={<Updates />} />
         <Route path="/settings" element={<Settings />} />
-        <Route exact path="/login" component={<Login />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/reset" element={<Reset />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
