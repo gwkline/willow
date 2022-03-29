@@ -18,7 +18,7 @@ function CreateProject() {
 
   return (
     <div>
-      <h1>This is the Create Projects page</h1>
+      <h1 className="page-title">This is the Create Projects page</h1>
       <NewProjectForm onAddProject={addProjectHandler} />
     </div>
   );

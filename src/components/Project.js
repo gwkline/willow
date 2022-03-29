@@ -14,7 +14,7 @@ function Project(props) {
   }
 
   return (
-    <div>
+    <div className="proj-display">
       <h1>{props.text}</h1>
       <p>{props.description}</p>
       <div>

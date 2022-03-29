@@ -3,7 +3,7 @@ import React from "react";
 function Updates() {
   return (
     <div>
-      <h1>Updates Page</h1>
+      <h1 className="page-title">Updates Page</h1>
     </div>
   );
 };
