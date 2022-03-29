@@ -7,10 +7,12 @@ import CreateProject from "./pages/createproject";
 import Projects from "./pages/projects";
 import Settings from "./pages/settings";
 import Updates from "./pages/updates";
+import Accounts from "./pages/Account";
 import Login from "./components/Login/Login"
 import Register from "./components/Login/Register";
 import Reset from "./components/Login/Reset";
 import Dashboard from "./components/Login/Dashboard";
+
 
 function App() {
   return (
@@ -18,20 +20,21 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/index" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/createproject" element={<CreateProject />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/updates" element={<Updates />} />
           <Route path="/settings" element={<Settings />} />
-          <Route exact path="/login" component={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/reset" element={<Reset />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route path="/account" element={<Accounts />} />
         </Routes>
-      </Router> 
-      <footer></footer>
+    </Router>
+    <footer></footer>
     </>
-       
+
   );
 }
 
