@@ -1,6 +1,8 @@
 import React from "react";
 import { Nav, NavLink, NavMenu, NavTitle } 
     from "./NavbarElements";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../Login/firebase"
 import leaf from "../../images/leaf.png";
   
 const Navbar = () => {
