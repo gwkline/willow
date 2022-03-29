@@ -7,11 +7,10 @@ import CreateProject from "./pages/createproject";
 import Projects from "./pages/projects";
 import Settings from "./pages/settings";
 import Updates from "./pages/updates";
-import Accounts from "./pages/Account";
+import Account from "./components/Login/Account";
 import Login from "./components/Login/Login"
 import Register from "./components/Login/Register";
 import Reset from "./components/Login/Reset";
-import Dashboard from "./components/Login/Dashboard";
 
 
 function App() {
@@ -26,10 +25,9 @@ function App() {
           <Route path="/updates" element={<Updates />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
-          <Route path="/account" element={<Accounts />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
     </Router>
     <footer></footer>
