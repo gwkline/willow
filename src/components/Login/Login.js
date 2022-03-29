@@ -3,10 +3,62 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import {
   auth,
+  logInWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithGoogle,
 } from "./firebase";
 import "./Login.css";
+/*
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const history = useNavigate();
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user);
+  }, [user, loading]);
+  return (
+    <div className="login">
+      <div className="login__container">
+        <input
+          type="text"
+          className="login__textBox"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail Address"
+        />
+        <input
+          type="password"
+          className="login__textBox"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button className="login__btn" onClick={logInWithEmailAndPassword}>
+          Login
+        </button>
+        <button
+          className="login__btn login__google"
+          onClick={signInWithGoogle}
+        >
+          Log in with Google
+        </button>
+        <div>
+          <Link to="/reset">Forgot password</Link>
+        </div>
+        <div>
+          Don't have an account? <Link to="/register">Register</Link> now.
+        </div>
+      </div>
+    </div>
+  );
+}
+export default Login;
+*/
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,4 +107,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default Login; 
