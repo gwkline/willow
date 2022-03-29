@@ -16,6 +16,7 @@ function Register() {
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
+    history.replace("/dashboard")
   };
   useEffect(() => {
     if (loading) return;

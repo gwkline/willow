@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from "../Login/firebase";
+import {auth} from "../Login/firebase";
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
   
@@ -71,9 +66,6 @@ const Navbar = () => {
       </>
     );
   }
-
-
-  
 };
   
 export default Navbar;
