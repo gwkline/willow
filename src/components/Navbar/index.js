@@ -30,6 +30,9 @@ const Navbar = () => {
             <NavLink to="/dashboard">
               Dashboard
             </NavLink>
+            <NavLink to="/Account">
+              Account
+            </NavLink>
           </NavMenu>
         </Nav>
       </>
