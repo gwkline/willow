@@ -96,19 +96,22 @@ footer {
 }
 
 .proj-display {
-  font-size: 12px;
+  font-size: 14px;
   width: 700px;
-  padding: 10px;
+  padding: 5px 0px 10px 15px;
   background-color: #CAD2C5;
   border-radius: 10px;
   border-style: solid;
   border-color: lightgray;
+  margin-bottom: 10px;
 }
 
 .page-title {
   display: inline-block;
+  align-items: center;
   width: 1100px;
   text-align: left;
+  font-size: 26px;
 }
 
 .title {

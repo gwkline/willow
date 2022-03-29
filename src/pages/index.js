@@ -3,8 +3,6 @@ import React from "react";
 function Home() {
   return (
     <div>
-      <h1>Willow</h1>
-
       <div className="homepagecontents">
         <card>
           <h2>Projects</h2>

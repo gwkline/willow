@@ -39,7 +39,9 @@ function Projects() {
 
   return (
     <section>
-      <h1>This is the Projects Page</h1>
+      <h1 className="page-title">Projects</h1>
+      <button className="create-proj-btn">+ Create New Project</button>
+      <hr></hr>
       <ProjectList projects={loadedProjects} />
     </section>
 

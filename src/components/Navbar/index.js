@@ -1,9 +1,7 @@
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {auth} from "../Login/firebase";
-import { Nav, NavLink, NavMenu } 
+import { Nav, NavLink, NavMenu, NavTitle } 
     from "./NavbarElements";
-  
+import leaf from "../../images/leaf.png";
   
 const Navbar = () => {
   const [user] = useAuthState(auth);
@@ -11,6 +9,10 @@ const Navbar = () => {
     return (
       <>
         <Nav>
+          <NavTitle>
+            <img src={leaf} alt="img" height={45} width={45}></img>
+            <h1>Willow</h1>
+          </NavTitle>
           <NavMenu>
             <NavLink to="/">
               Home
@@ -42,6 +44,10 @@ const Navbar = () => {
     return (
       <>
         <Nav>
+          <NavTitle>
+            <img src={leaf} alt="img" height={45} width={45}></img>
+            <h1>Willow</h1>
+          </NavTitle>
           <NavMenu>
             <NavLink to="/">
               Home
