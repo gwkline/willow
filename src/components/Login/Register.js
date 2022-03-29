@@ -11,7 +11,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const history = useNavigate();
   const register = () => {
     if (!name) alert("Please enter name");
@@ -21,7 +21,7 @@ function Register() {
   useEffect(() => {
     if (loading) return;
     if (user) history.replace("/dashboard");
-  }, [user, loading]);
+  }, [user, loading, history]);
   return (
     <div className="register">
       <div className="register__container">

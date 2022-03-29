@@ -6,7 +6,7 @@ import { Nav, NavLink, NavMenu }
   
   
 const Navbar = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   if (user) {
     return (
       <>
