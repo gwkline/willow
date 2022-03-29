@@ -9,7 +9,8 @@ function Account() {
   return (
     <div>
       <h1>This is the Account page</h1>
-      <h2> Email: ../../src/comp</h2>
+      <h2> Name: Your name</h2>
+      <h3> Email: Your email</h3>
       <ProjectList projects={loadedProjects} />
     </div>
   );
