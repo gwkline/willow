@@ -2,7 +2,7 @@ import React from "react";
 import { Nav, NavLink, NavMenu, NavTitle } 
     from "./NavbarElements";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../Login/firebase"
+import { auth } from "../../firebase"
 import leaf from "../../images/leaf.png";
   
 const Navbar = () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
             <NavLink to="/projects">
               Projects
             </NavLink>
-            <NavLink to="/Updates">
+            <NavLink to="/updates">
               Updates
             </NavLink>
             <NavLink to="/settings">

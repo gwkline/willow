@@ -7,10 +7,10 @@ import CreateProject from "./pages/createproject";
 import Projects from "./pages/projects";
 import Settings from "./pages/settings";
 import Updates from "./pages/updates";
-import Account from "./components/Login/Account";
-import Login from "./components/Login/Login"
-import Register from "./components/Login/Register";
-import Reset from "./components/Login/Reset";
+import Account from "./pages/accounts";
+import Login from "./pages/login"
+import Register from "./pages/register";
+import Reset from "./pages/reset";
 
 
 function App() {
