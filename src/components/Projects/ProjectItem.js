@@ -1,4 +1,18 @@
+import { useState } from "react";
+import Modal from "../Modal";
+import Backdrop from "../Backdrop";
+
 function ProjectItem(props) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function viewHandler() {
+    setModalIsOpen(true);
+  }
+
+  function closeModalHandler() {
+    setModalIsOpen(false);
+  }
+
   return (
     <>
       <li className="proj-display" style={{listStyle:'none'}}>
@@ -7,8 +21,16 @@ function ProjectItem(props) {
           <p>{props.description}</p>
         </div>
         <div>
-          <button>View Project {'>'}</button>
-        </div>
+        <button onClick={viewHandler}>View Project</button>
+      </div>
+      {modalIsOpen && (
+        <Modal
+          onClose={closeModalHandler}
+          title={props.title}
+          description={props.description}
+        />
+      )}
+      {modalIsOpen && <Backdrop onClick={closeModalHandler} />}
       </li>
     </>
     

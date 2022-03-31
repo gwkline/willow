@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-
 import React from "react";
 import NewProjectForm from "../components/Projects/NewProjectForm";
 

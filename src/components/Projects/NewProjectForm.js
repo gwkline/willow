@@ -1,8 +1,15 @@
 import { useRef } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../../firebase";
 
 function NewProjectForm(props) {
   const titleinputRef = useRef();
   const descriptionInputRef = useRef();
+  const [user, loading] = useAuthState(auth);
 
   function submitHandler(event) {
     event.preventDefault();
@@ -13,6 +20,7 @@ function NewProjectForm(props) {
     const projectData = {
         title: enteredTitle,
         description: enteredDescription,
+        users: [user.uid]
     };
 
     props.onAddProject(projectData);

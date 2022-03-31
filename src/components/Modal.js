@@ -5,7 +5,8 @@ function Modal(props) {
 
   return (
     <div className="modal">
-      <p>Placeholder Content for the Project</p>
+      <h1>{props.title}</h1>
+      <p>{props.description}</p>
       <button className="btn btn--alt">Do Something</button>
       <button className="btn" onClick={closeModalHandler}>
         Close Modal

@@ -100,3 +100,4 @@ sendPasswordReset,
 sendPasswordResetEmail,
 logout,
   };
+
