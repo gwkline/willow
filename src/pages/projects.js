@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDatabase, ref, child, get, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import NewProjectForm from "../components/Projects/NewProjectForm";
