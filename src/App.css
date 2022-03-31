@@ -19,15 +19,15 @@ h1, h2 {
   padding: 0.5rem 1.5rem;
   cursor: pointer;
   border-radius: 4px;
-  background-color: #800040;
+  background-color: #52796f;
   color: white;
-  border: 1px solid #800040;
+  border: 1px solid lightgray;
   margin: 0 1rem;
 }
 
 .btn:hover {
-  background-color: #9c1458;
-  border-color: #9c1458;
+  background-color: #84a98c;
+  border-color: #84a98c;
 }
 
 .btn--alt {
@@ -50,6 +50,11 @@ h1, h2 {
   position: relative;
 }
 
+.create-proj-btn:hover {
+  background-color: #84a98c;
+  border-color: #84a98c;
+}
+
 .card {
   background-color: white;
   border-radius: 4px;
@@ -70,6 +75,10 @@ footer {
 
 .actions {
   text-align: right;
+}
+
+label {
+  display: block;
 }
 
 .modal {
@@ -242,4 +251,8 @@ footer {
 }
 .reset div {
   margin-top: 7px;
+}
+
+textarea {
+  resize: none;
 }
