@@ -9,6 +9,8 @@ function ProjectList(props) {
           id={project.id}
           title={project.title}
           description={project.description}
+          users={project.users}
+          tasks={project.tasks}
         />
       ))}
     </ul>

@@ -14,8 +14,10 @@ function Projects() {
         return response.json();
       })
       .then((data) => {
+    
         const projects =[]
         for (const key in data) {
+          console.log(key)
           const project = {
             id: key,
             ...data[key]

@@ -19,6 +19,8 @@ function ProjectItem(props) {
         <div>
           <h1>{props.title}</h1>
           <p>{props.description}</p>
+          <p>{props.users}</p>
+          <p>{props.tasks}</p>
         </div>
         <div>
         <button onClick={viewHandler}>View Project</button>
