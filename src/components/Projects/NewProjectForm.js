@@ -7,7 +7,7 @@ import {
 function NewProjectForm(props) {
   const titleinputRef = useRef();
   const descriptionInputRef = useRef();
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   function submitHandler(event) {
     event.preventDefault();

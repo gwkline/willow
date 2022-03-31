@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, child, get, set, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import NewProjectForm from "../components/Projects/NewProjectForm";
@@ -15,13 +15,10 @@ function Projects() {
 
   useEffect(() => {
     setIsLoading(true);
-
-    fetch("https://cis-454-group-2-default-rtdb.firebaseio.com/projects.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-    
+    const db = getDatabase();
+    const projectRef = ref(db, 'projects');
+    onValue(projectRef, (snapshot) => {
+      const data = snapshot.val();
         const projects =[]
         for (const key in data) {
           console.log(key)
@@ -35,7 +32,7 @@ function Projects() {
 
         setIsLoading(false);
         setLoadedProjects(projects);
-      });
+    });
   }, []);
 
   if (isLoading) {
@@ -54,7 +51,7 @@ function Projects() {
     closeModalHandler()
   }
   
-
+  
   function viewHandler() {
     setModalIsOpen(true);
   }
