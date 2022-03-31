@@ -29,25 +29,38 @@ function NewProjectForm(props) {
     props.onAddProject(projectData);
   }
 
+  function closeModalHandler() {
+    props.onClose();
+  }
+
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-        <label htmlFor="title">Project Title</label>
-        <input type="text" required id="title" ref={titleinputRef} />
-      </div>
-      <div>
-        <label htmlFor="description">Project Description</label>
-        <input
-          type="text"
-          required
-          id="description"
-          ref={descriptionInputRef}
-        />
-      </div>
-      <div>
-        <button>Add Project</button>
-      </div>
-    </form>
+    <div className="modal">
+      <h2>Create New Project</h2>
+      <hr></hr>
+      <form onSubmit={submitHandler}>
+        <div>
+          <label htmlFor="title">Project Title: </label>
+          <textarea rows="1" cols="30" type="text" required id="title" ref={titleinputRef} />
+        </div>
+        <br></br>
+        <div>
+          <label htmlFor="description">Project Description: </label>
+          <textarea
+            placeholder="Description"
+            required
+            rows="3"
+            cols="30"
+            id="description"
+            ref={descriptionInputRef}
+          />
+        </div>
+        <div>
+          <button className="btn">Add Project</button>
+          <button className="btn" onClick={closeModalHandler}>Cancel</button>
+        </div>
+      </form>
+    </div>
+    
   );
 }
 
