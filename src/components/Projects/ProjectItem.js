@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Modal from "../Modal";
 import Backdrop from "../Backdrop";
+import { getDatabase, ref, update } from "firebase/database";
+
 
 function ProjectItem(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -13,6 +15,14 @@ function ProjectItem(props) {
     setModalIsOpen(false);
   }
 
+  //deletes the project from realtime database
+  function deleteHandler() {
+    const db = getDatabase();
+    const updates = {};
+    updates['/projects/' + props.id] = null;
+    return update(ref(db), updates);
+  }
+
   return (
     <>
       <li className="proj-display" style={{listStyle:'none'}}>
@@ -22,6 +32,7 @@ function ProjectItem(props) {
         </div>
         <div>
         <button onClick={viewHandler}>View Project {'>'}</button>
+        <button onClick={deleteHandler}>Delete Project {'X'}</button>
       </div>
       {modalIsOpen && (
         <Modal
