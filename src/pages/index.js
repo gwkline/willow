@@ -10,7 +10,7 @@ function Home() {
         </card>
         <card>
           <h2>Messages</h2>
-          <div>Placeholder Text for Messages</div>
+          <div>Placeholder Text for Messages hi</div>
         </card>
         <card>
           <h2>Updates</h2>
