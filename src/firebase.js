@@ -68,7 +68,7 @@ try {
     const user = res.user;
     await addDoc(collection(db, "users"), {
     uid: user.uid,
-    name,
+    name: name,
     authProvider: "local",
     email,
     });
