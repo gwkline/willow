@@ -21,7 +21,6 @@ function Projects() {
       const data = snapshot.val();
         const projects =[]
         for (const key in data) {
-          console.log(key)
           const project = {
             id: key,
             ...data[key]
