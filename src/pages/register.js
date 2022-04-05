@@ -14,9 +14,9 @@ function Register() {
   const [name, setName] = useState("");
   const [user, loading] = useAuthState(auth);
   const history = useNavigate();
-  const register = () => {
+  const register = async () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    registerWithEmailAndPassword(name, email, password)
     history("/account")
   };
   useEffect(() => {
