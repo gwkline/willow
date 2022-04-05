@@ -29,7 +29,7 @@ const [loadedProjects, setLoadedProjects] = useState([]);
     <div className="dashboard">
       <div>
       <h1>This is the Account page</h1>
-      <h2> Name: {user?.name}</h2>
+      <h2> Name: {user?.displayName}</h2>
       <h3> Email: {user?.email}</h3>
       <ProjectList projects={loadedProjects} />
     </div>
