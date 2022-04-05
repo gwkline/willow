@@ -6,11 +6,11 @@ function Home() {
       <div className="homepagecontents">
         <card>
           <h2>Projects</h2>
-          <div>Placeholder Text for Projects hello</div>
+          <div>Placeholder Text for Projects</div>
         </card>
         <card>
           <h2>Messages</h2>
-          <div>Placeholder Text for Messages hi</div>
+          <div>Placeholder Text for Messages</div>
         </card>
         <card>
           <h2>Updates</h2>
