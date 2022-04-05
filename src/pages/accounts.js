@@ -8,6 +8,7 @@ import ProjectList from "../components/Projects/ProjectList";
 
 
 function Account() {
+  
 const [loadedProjects, setLoadedProjects] = useState([]);
   const [user, loading] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -32,8 +33,10 @@ const [loadedProjects, setLoadedProjects] = useState([]);
     <div className="dashboard">
       <div>
       <h1>This is the Account page</h1>
-      <h2> Name: Your name</h2>
-      <h3> Email: Your email</h3>
+      Name:
+      <div>{name}</div>
+      Email:
+      <div>{user?.email}</div>
       <ProjectList projects={loadedProjects} />
     </div>
        <div className="dashboard__container">
