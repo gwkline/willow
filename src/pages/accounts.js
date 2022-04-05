@@ -9,20 +9,10 @@ import ProjectList from "../components/Projects/ProjectList";
 function Account() {
 const [loadedProjects, setLoadedProjects] = useState([]);
   const [user, loading] = useAuthState(auth);
-  const [name, setName] = useState("");
   const navigate = useNavigate();
-  const fetchUserName = async () => {
-    try {
-      setName(user.uid);
-    } catch (err) {
-      console.error(err);
-      alert("An error occured while fetching user data");
-    }
-  };
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/register");
-    fetchUserName();
   }, [user, loading]);
 
   return (
@@ -35,7 +25,7 @@ const [loadedProjects, setLoadedProjects] = useState([]);
     </div>
        <div className="dashboard__container">
         Logged in as
-         <div>{name}</div>
+         <div>{user?.displayName}</div>
          <div>{user?.email}</div>
          <button className="dashboard__btn" onClick={logout}>
           Logout
