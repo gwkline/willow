@@ -3,9 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {
   auth,
 } from "../../firebase";
-import { getAuth } from 'firebase/auth';
 import { v4 as uuid } from "uuid";
-import { isCompositeComponent } from "react-dom/test-utils";
 
 function NewProjectForm(props) {
   const titleinputRef = useRef();
