@@ -253,6 +253,20 @@ label {
   margin-top: 7px;
 }
 
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statusSelect {
+  display: inline-flex;
+}
+
+.statusDropdown {
+  margin-left: 5px;
+}
+
 textarea {
   resize: none;
 }

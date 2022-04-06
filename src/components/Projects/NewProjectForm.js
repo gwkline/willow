@@ -31,7 +31,7 @@ function NewProjectForm(props) {
       title: enteredTitle,
       description: enteredDescription,
       owner: user_id,
-      tasks: [task],
+      tasks: [],
     };
 
     props.onAddProject(projectData);

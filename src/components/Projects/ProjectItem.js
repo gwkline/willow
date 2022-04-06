@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../Modal";
+import ProjectDetails from "./ProjectDetails";
 import Backdrop from "../Backdrop";
 import { getDatabase, ref, update, onValue, set } from "firebase/database";
 import InviteMember from "./InviteMember";
@@ -76,7 +76,8 @@ function ProjectItem(props) {
         </div>
         <div>
           {modalIsOpen && (
-            <Modal
+            <ProjectDetails
+              currProj={props.id}
               onClose={closeModalHandler}
               title={props.title}
               description={props.description}
