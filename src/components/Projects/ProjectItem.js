@@ -23,9 +23,21 @@ function ProjectItem(props) {
     const db = getDatabase();
     const updates = {};
     updates['/projects/' + props.id] = null;
-    //TODO: delete project from users projects
-    //updates['/users/' + props.owner + '/projects/' + props.id] = null;
-    return update(ref(db), updates);
+    update(ref(db), updates);
+    const userRef = ref(db, 'users');
+
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      for (let userID in data) {
+        for (let project in data[userID].projects) {
+          if (project === props.id) {
+            set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
+          }
+        }
+
+      }
+    })
+
   }
 
   function inviteHandler() {
