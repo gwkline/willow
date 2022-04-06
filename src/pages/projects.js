@@ -46,6 +46,7 @@ function Projects() {
     console.log(projectData);
     const db = getDatabase();
     set(ref(db, 'projects/' + projectData.key), projectData);
+    set(ref(db, 'users/' + projectData.owner + '/' + projectData.key), projectData.key)
     navigate("/projects");
     closeModalHandler()
   }
