@@ -11,3 +11,4 @@ mappings.set(actions.REMOVE_USER, [roles.GROUPLEAD]);
 mappings.set(actions.MANAGE_ROLES, [roles.GROUPLEAD]);
 mappings.set(actions.ASSIGN_TASKS, [roles.GROUPLEAD]);
 mappings.set(actions.CHANGE_STATUS, [roles.GROUPLEAD, roles.GROUPMEMBER]);
+mappings.set(actions.INVITE_MEMBER, [roles.GROUPLEAD]);
