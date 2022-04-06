@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/index";
 import Projects from "./pages/projects";
 import Settings from "./pages/settings";
-import Updates from "./pages/updates";
 import Account from "./pages/accounts";
 import Login from "./pages/login"
 import Register from "./pages/register";
@@ -20,7 +19,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/updates" element={<Updates />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

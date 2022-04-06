@@ -22,9 +22,6 @@ const Navbar = () => {
             <NavLink to="/projects">
               Projects
             </NavLink>
-            <NavLink to="/updates">
-              Updates
-            </NavLink>
             <NavLink to="/settings">
               Settings
             </NavLink>
