@@ -19,11 +19,7 @@ function NewProjectForm(props) {
         title: enteredTitle,
         description: enteredDescription,
         users: [user.uid],
-        status: {
-          new: [""],
-          inProgress: [""],
-          completed: [""]
-        }
+        tasks: {}
     };
 
     props.onAddProject(projectData);
