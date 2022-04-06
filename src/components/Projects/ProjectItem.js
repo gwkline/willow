@@ -24,8 +24,8 @@ function ProjectItem(props) {
     const updates = {};
     updates['/projects/' + props.id] = null;
     update(ref(db), updates);
-    const userRef = ref(db, 'users');
 
+    const userRef = ref(db, 'users');
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       for (let userID in data) {
@@ -34,7 +34,6 @@ function ProjectItem(props) {
             set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
           }
         }
-
       }
     })
 
