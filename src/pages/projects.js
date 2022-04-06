@@ -19,18 +19,18 @@ function Projects() {
     const projectRef = ref(db, 'projects');
     onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
-        const projects =[]
-        for (const key in data) {
-          const project = {
-            id: key,
-            ...data[key]
-          };
+      const projects = []
+      for (const key in data) {
+        const project = {
+          id: key,
+          ...data[key]
+        };
 
-          projects.push(project);
-        }
+        projects.push(project);
+      }
 
-        setIsLoading(false);
-        setLoadedProjects(projects);
+      setIsLoading(false);
+      setLoadedProjects(projects);
     });
   }, []);
 
@@ -45,12 +45,12 @@ function Projects() {
   function addProjectHandler(projectData) {
     console.log(projectData);
     const db = getDatabase();
-    set(ref(db, 'projects/' + projectData.title), projectData);
+    set(ref(db, 'projects/' + projectData.key), projectData);
     navigate("/projects");
     closeModalHandler()
   }
-  
-  
+
+
   function viewHandler() {
     setModalIsOpen(true);
   }
@@ -70,8 +70,8 @@ function Projects() {
       <div>
         {modalIsOpen && (
           <NewProjectForm
-          onAddProject={addProjectHandler}
-          onClose={closeModalHandler}/>
+            onAddProject={addProjectHandler}
+            onClose={closeModalHandler} />
         )}
         {modalIsOpen && <Backdrop onClick={closeModalHandler} />}
       </div>

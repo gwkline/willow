@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {
   auth,
 } from "../../firebase";
+import { v4 as uuid } from "uuid";
 
 function NewProjectForm(props) {
   const titleinputRef = useRef();
@@ -14,16 +15,25 @@ function NewProjectForm(props) {
 
     const enteredTitle = titleinputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
+    const unique_id = uuid();
+
+    let task = {
+      name: "",
+      description: "",
+      status: "",
+      assigned_to: "",
+    }
 
     const projectData = {
-        title: enteredTitle,
-        description: enteredDescription,
-        users: [user.uid],
-        status: {
-          new: [""],
-          inProgress: [""],
-          completed: [""]
-        }
+      key: unique_id,
+      title: enteredTitle,
+      description: enteredDescription,
+      owner: user.uid,
+      tasks: {
+        new: [task],
+        inProgress: [task],
+        completed: [task]
+      }
     };
 
     props.onAddProject(projectData);
@@ -60,7 +70,7 @@ function NewProjectForm(props) {
         </div>
       </form>
     </div>
-    
+
   );
 }
 
