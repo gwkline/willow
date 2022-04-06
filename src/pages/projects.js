@@ -18,9 +18,10 @@ function Projects() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
 
-  let userProjectArray = [];
+
 
   useEffect(() => {
+    let userProjectArray = [];
     setIsLoading(true);
     const db = getDatabase();
     const projectRef = ref(db, 'projects');
@@ -58,7 +59,7 @@ function Projects() {
       setLoadedProjects(projects);
       navigate('/projects/')
     });
-  }, []);
+  }, [user.uid, navigate]);
 
   if (isLoading) {
     return (
