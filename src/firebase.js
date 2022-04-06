@@ -8,15 +8,13 @@ import {
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
+    updateProfile
 } from "firebase/auth";
+
+import { getDatabase, ref, set, get, child } from "firebase/database";
 
 import {
     getFirestore,
-    query,
-    getDocs,
-    collection,
-    where,
-    addDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -35,69 +33,95 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
-try {
-    const res = await signInWithPopup(auth, googleProvider);
-    const user = res.user;
-    const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    const docs = await getDocs(q);
-    if (docs.docs.length === 0) {
-    await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        name: user.displayName,
-        authProvider: "google",
-        email: user.email,
-    });
+    try {
+        await signInWithPopup(auth, googleProvider)
+            .then(function (result) {
+                const userData = {
+                    uid: result.user.uid,
+                    email: result.user.email,
+                    projects: [""]
+                }
+
+                const dbRef = ref(getDatabase());
+                get(child(dbRef, `users/${result.user.uid}`)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+                    } else {
+                        let db = getDatabase();
+                        set(ref(db, 'users/' + result.user.uid), userData)
+
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                });
+
+                return updateProfile(result.user, { displayName: result.user.displayName })
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
     }
-} catch (err) {
-    console.error(err);
-    alert(err.message);
-}
 };
 
 const logInWithEmailAndPassword = async (email, password) => {
-try {
-    await signInWithEmailAndPassword(auth, email, password);
-} catch (err) {
-    console.error(err);
-    alert(err.message);
-}
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
+
 const registerWithEmailAndPassword = async (name, email, password) => {
-try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-    uid: user.uid,
-    name,
-    authProvider: "local",
-    email,
-    });
-} catch (err) {
-    console.error(err);
-    alert(err.message);
-}
+    try {
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then(function (result) {
+                const userData = {
+                    uid: result.user.uid,
+                    email: result.user.email,
+                    projects: [""]
+                }
+
+                let database = getDatabase();
+                set(ref(database, 'users/' + result.user.uid), userData);
+                return updateProfile(result.user, { displayName: name })
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
+
 const sendPasswordReset = async (email) => {
-try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
-} catch (err) {
-    console.error(err);
-    alert(err.message);
-}
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Password reset link sent!");
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 };
+
 const logout = () => {
-signOut(auth);
+    signOut(auth);
 };
 export {
-auth,
-db,
-signInWithGoogle,
-logInWithEmailAndPassword,
-signInWithEmailAndPassword,
-registerWithEmailAndPassword,
-sendPasswordReset,
-sendPasswordResetEmail,
-logout,
-  };
-
+    auth,
+    db,
+    signInWithGoogle,
+    logInWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    registerWithEmailAndPassword,
+    sendPasswordReset,
+    sendPasswordResetEmail,
+    logout,
+};
