@@ -19,12 +19,12 @@ function NewProjectForm(props) {
 
     const user_id = user.uid;
 
-    let task = {
-      name: "",
-      description: "",
-      status: "",
-      assigned_to: "",
-    }
+    // let task = {
+    //   name: "",
+    //   description: "",
+    //   status: "",
+    //   assigned_to: "",
+    // }
 
     const projectData = {
       key: unique_id,

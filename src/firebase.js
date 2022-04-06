@@ -39,7 +39,6 @@ const signInWithGoogle = async () => {
                 const userData = {
                     uid: result.user.uid,
                     email: result.user.email,
-                    projects: [""]
                 }
 
                 const dbRef = ref(getDatabase());
