@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 import Backdrop from "../Backdrop";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, update, onValue } from "firebase/database";
 
 
 function ProjectItem(props) {
@@ -23,6 +23,27 @@ function ProjectItem(props) {
     return update(ref(db), updates);
   }
 
+  //deletes the project from realtime database
+  function addMember(userEmail) {
+
+    const db = getDatabase();
+    const projectRef = ref(db, 'users');
+
+    onValue(projectRef, (snapshot) => {
+      const data = snapshot.val();
+        for (let key in data) {
+          if (key.email === userEmail) {
+            let updates = {}
+            updates['/users/' + key + '/projects/'] = props.id;
+            update(ref(db, 'users/' + key), updates);
+          }
+        }
+    
+    });
+  }
+
+
+
   return (
     <>
       <li className="proj-display" style={{listStyle:'none'}}>
@@ -33,6 +54,7 @@ function ProjectItem(props) {
         <div>
         <button onClick={viewHandler}>View Project {'>'}</button>
         <button onClick={deleteHandler}>Delete Project {'X'}</button>
+        <button onClick={addMember}>Add member {'!'}</button>
       </div>
       {modalIsOpen && (
         <Modal

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, update } from "firebase/database";
+import {getAuth} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import NewProjectForm from "../components/Projects/NewProjectForm";
@@ -13,26 +14,42 @@ function Projects() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     setIsLoading(true);
+    let user = getAuth().currentUser;
     const db = getDatabase();
+
+    
+    let userProjects = []
+
+    const userRef = ref(db, 'users/' + user.uid + '/projects');
+    onValue(userRef, (snapshot) => {
+      const projectList = snapshot.val();
+      userProjects = projectList;
+    });
+
+    console.log(userProjects);
+
+
     const projectRef = ref(db, 'projects');
     onValue(projectRef, (snapshot) => {
-      const data = snapshot.val();
+      const projectList = snapshot.val();
         const projects =[]
-        for (const key in data) {
-          const project = {
-            id: key,
-            ...data[key]
-          };
-
-          projects.push(project);
+        for (let project in projectList) {
+          if (userProjects.includes(project)) {
+            let projectObject = {
+              id: project,
+              ...projectList[project]
+            }
+            projects.push(projectObject);
+          }
         }
 
         setIsLoading(false);
         setLoadedProjects(projects);
     });
-  }, []);
+  }, [navigate]);
 
   if (isLoading) {
     return (
@@ -43,9 +60,18 @@ function Projects() {
   }
 
   function addProjectHandler(projectData) {
-    console.log(projectData);
     const db = getDatabase();
-    set(ref(db, 'projects/' + projectData.title), projectData);
+    set(ref(db, 'projects/' + projectData.key), projectData)
+    .then(function(result) {
+      let thisRef = ref(db, 'projects/' + projectData.key)
+      let updates = {}
+      updates['/users/' + projectData.owner + '/projects/'] = thisRef.key;
+      update(ref(db, 'users/' + projectData.owner), updates);
+
+    }).catch(function(error) {
+      console.log(error);
+    });
+
     navigate("/projects");
     closeModalHandler()
   }
