@@ -31,7 +31,7 @@ function Projects() {
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       for (let userID in data) {
-        if (userID == user.uid) {
+        if (userID === user.uid) {
           for (let projectID in data[userID].projects) {
             userProjectArray.push(data[userID].projects[projectID]);
           }

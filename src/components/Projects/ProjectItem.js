@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 import Backdrop from "../Backdrop";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, update, onValue, set } from "firebase/database";
 import InviteMember from "./InviteMember";
 
 
@@ -32,16 +32,21 @@ function ProjectItem(props) {
     openInviteModal(true);
   }
 
-  // function addMember(email) {
-  //   const db = getDatabase();
-  //   set(ref(db, 'users/' + projectData.owner + '/projects/' + projectData.key), projectData.key)
-  //   navigate("/projects");
-  //   closeModalHandler()
-  // }
+  function addMember(email) {
+    const db = getDatabase();
+    const userRef = ref(db, 'users');
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      for (let userID in data) {
+        if (data[userID].email === email.email) {
+          set(ref(db, 'users/' + userID + '/projects/' + props.id), props.id)
+        }
+      }
+    })
+  }
 
   function inviteMemberHandler(email) {
-    console.log(email);
-    //addMember(email);
+    addMember(email);
     openInviteModal(false);
 
   }
