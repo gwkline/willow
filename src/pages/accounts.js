@@ -7,6 +7,7 @@ import ProjectList from "../components/Projects/ProjectList";
 
 
 function Account() {
+  
 const [loadedProjects, setLoadedProjects] = useState([]);
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
@@ -19,8 +20,10 @@ const [loadedProjects, setLoadedProjects] = useState([]);
     <div className="dashboard">
       <div>
       <h1>This is the Account page</h1>
+
       <h2> Name: {user?.displayName}</h2>
       <h3> Email: {user?.email}</h3>
+
       <ProjectList projects={loadedProjects} />
     </div>
        <div className="dashboard__container">
