@@ -13,24 +13,42 @@ function Projects() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  let userProjectArray = [];
+
   useEffect(() => {
     setIsLoading(true);
     const db = getDatabase();
     const projectRef = ref(db, 'projects');
+    const userRef = ref(db, 'users');
+
+    //Check if the current user's project list has changed
+    //if so, add it to the projects array
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      for (let userID in data) {
+        userProjectArray = Object.keys(data[userID].projects)
+      }
+    })
+    console.log(userProjectArray);
+
     onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
+      //console.log(data); //gives project list
       const projects = []
-      for (const key in data) {
-        const project = {
-          id: key,
-          ...data[key]
-        };
+      for (const projectID in data) {
+        if (userProjectArray.includes(projectID)) {
+          const project = {
+            id: projectID,
+            ...data[projectID]
+          };
 
-        projects.push(project);
+          projects.push(project);
+        }
       }
 
       setIsLoading(false);
       setLoadedProjects(projects);
+      navigate('/projects/')
     });
   }, []);
 
