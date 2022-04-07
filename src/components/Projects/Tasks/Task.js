@@ -5,7 +5,10 @@ function Task(props) {
 
     function updateStatus(value) {
         const db = getDatabase();
-        // change status of given task using value
+        console.log("WORKING")
+        update(ref(db, 'tasks/' + props.id), {
+            status: value
+        })
     }
 
 
