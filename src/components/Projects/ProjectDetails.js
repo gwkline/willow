@@ -1,5 +1,4 @@
-import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
-import { getDatabase, ref, set, update, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
 
@@ -44,6 +43,13 @@ function ProjectDetails(props) {
     function addTaskHandler(taskDetails) {
         const db = getDatabase();
         set(ref(db, 'projects/' + props.currProj + '/tasks'), taskDetails);
+        const newTask = {
+          name: taskDetails.name,
+          description: taskDetails.description,
+          assigned_to: taskDetails.assigned_to,
+          status: taskDetails.status
+        };
+        props.tasks.push(newTask);
     }
   
     return (

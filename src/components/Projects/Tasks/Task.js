@@ -1,22 +1,19 @@
-import { useState } from "react";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 function Task(props) {
 
-    function updateStatus(value) {
-        const db = getDatabase();
-        // change status of given task using value
-    }
-
-
     return (
         <div className="task">
-            <p>Name: {props.name}</p>
-            <p>Desc: {props.description}</p>
-            <p>Assigned To: {props.assigned_to}</p>
+            <p>{props.name}</p>
+            <p>{props.description}</p>
+            <label>Assigned To:</label>
+            <select className="statusDropdown" name="assigneeDropdown" id="assignee">
+                <option>Member 1</option>
+            </select>
+
             <div className="statusSelect">
                 <label htmlFor="status">Status:</label>
-                <select className="statusDropdown" name="statusDropdown" id="status" onChange={updateStatus}>
+                <select className="statusDropdown" name="statusDropdown" id="status">
                     <option value="new">New</option>
                     <option value="in progress">In Progress</option>
                     <option value="complete">Complete</option>
