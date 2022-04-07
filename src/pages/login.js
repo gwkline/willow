@@ -25,7 +25,7 @@ function Login() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/account");
+    if (user) navigate("/home");
   }, [user, loading, navigate]);
   return (
     <div className="login">
