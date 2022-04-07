@@ -16,11 +16,11 @@ function Login() {
   const login = () => {
     if (!email) alert("Please enter email");
     signInWithEmailAndPassword(auth, email, password);
-    navigate("/home")
+    navigate("/")
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/home");
+    if (user) navigate("/");
   }, [user, loading, navigate]);
   return (
     <div className="login">
