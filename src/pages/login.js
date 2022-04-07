@@ -21,7 +21,7 @@ function Login() {
   const login = () => {
     if (!email) alert("Please enter email");
     signInWithEmailAndPassword(auth, email, password);
-    navigate("/account")
+    navigate("/")
   };
   useEffect(() => {
     if (loading) return;
