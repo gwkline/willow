@@ -27,7 +27,7 @@ function ProjectDetails(props) {
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, []);
+  }, [props.currProj]);
   if (isLoading) {
     return (
       <section>

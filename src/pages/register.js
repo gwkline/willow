@@ -14,6 +14,11 @@ function Register() {
   const [name, setName] = useState("");
   const [user, loading] = useAuthState(auth);
   const history = useNavigate();
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      register()
+    }
+  }
   const register = async () => {
     if (!name) alert("Please enter name");
     else registerWithEmailAndPassword(name, email, password)
@@ -43,11 +48,12 @@ function Register() {
         <input
           type="password"
           className="register__textBox"
+          onKeyDown={handleKeyDown}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
+        <button className="register__btn" onKeyDown={handleKeyDown} onClick={register}>
           Register
         </button>
         <button
