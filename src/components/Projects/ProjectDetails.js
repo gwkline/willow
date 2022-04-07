@@ -40,23 +40,31 @@ function ProjectDetails(props) {
     props.onClose();
   }
 
-  function addTaskHandler(taskDetails) {
-    const db = getDatabase();
-    set(ref(db, 'projects/' + props.currProj + '/tasks'), taskDetails);
-  }
 
-  return (
-    <div className="modal">
-      <h1>{props.title}</h1>
-      <p>{props.description}</p>
-      <hr></hr>
-      <div>
-        <h2>Tasks</h2>
-        <button onClick={addTaskHandler}>Add Task {'+'}</button>
-      </div>
-      <div>
-        <TaskList tasks={loadedTasks} />
-      </div>
+    function addTaskHandler(taskDetails) {
+        const db = getDatabase();
+        set(ref(db, 'projects/' + props.currProj + '/tasks'), taskDetails);
+        const newTask = {
+          name: taskDetails.name,
+          description: taskDetails.description,
+          assigned_to: taskDetails.assigned_to,
+          status: taskDetails.status
+        };
+        props.tasks.push(newTask);
+    }
+  
+    return (
+      <div className="modal">
+        <h1>{props.title}</h1>
+        <p>{props.description}</p>
+        <hr></hr>
+        <div>
+            <h2>Tasks</h2>
+            <button onClick={addTaskHandler}>Add Task {'+'}</button>
+        </div>
+        <div>
+            <TaskList tasks={loadedTasks}/>
+        </div>
 
       <button className="btn btn--alt">Do Something</button>
       <button className="btn" onClick={closeModalHandler}>
