@@ -3,42 +3,43 @@ import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
 
 function ProjectDetails(props) {
-    const [loadedTasks, setLoadedTasks] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [loadedTasks, setLoadedTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        setIsLoading(true);
-        const db = getDatabase();
-        const projectRef = ref(db, 'projects');
-        onValue(projectRef, (snapshot) => {
-            const data = snapshot.val();
-            const tasks = [];
-            for (const id in data) {
-                if (id == props.currProj) {
-                    const taskList = data[id].tasks;
-                    console.log("ids match");
-                    for (const t in taskList) {
-                        console.log(taskList[t]);
-                        tasks.push(taskList[t]);
-                    }
-                }
-                break;
-            }
-            setLoadedTasks(tasks);
-            setIsLoading(false);
-        });
-    }, []);
-    if (isLoading) {
-        return (
-          <section>
-            <p>Loading...</p>
-          </section>
-        );
+  useEffect(() => {
+    setIsLoading(true);
+    const db = getDatabase();
+    const projectRef = ref(db, 'projects');
+    onValue(projectRef, (snapshot) => {
+      const data = snapshot.val();
+      const tasks = [];
+      for (const id in data) {
+        if (id === props.currProj) {
+          const taskList = data[id].tasks;
+          console.log("ids match");
+          for (const t in taskList) {
+            console.log(taskList[t]);
+            tasks.push(taskList[t]);
+          }
+        }
+        break;
       }
+      setLoadedTasks(tasks);
+      setIsLoading(false);
+    });
+  }, [props.currProj]);
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
-    function closeModalHandler() {
-        props.onClose();
-    }
+  function closeModalHandler() {
+    props.onClose();
+  }
+
 
     function addTaskHandler(taskDetails) {
         const db = getDatabase();
@@ -65,13 +66,12 @@ function ProjectDetails(props) {
             <TaskList tasks={loadedTasks}/>
         </div>
 
-        <button className="btn btn--alt">Do Something</button>
-        <button className="btn" onClick={closeModalHandler}>
-          Close Modal
-        </button>
-      </div>
-    );
-  }
-  
-  export default ProjectDetails;
-  
+      <button className="btn btn--alt">Do Something</button>
+      <button className="btn" onClick={closeModalHandler}>
+        Close Modal
+      </button>
+    </div>
+  );
+}
+
+export default ProjectDetails;

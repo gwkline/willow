@@ -1,20 +1,14 @@
 import { useRef } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  auth,
-} from "../../firebase";
 
 function InviteMember(props) {
   const emailRef = useRef();
-  const [user] = useAuthState(auth);
-
   function submitHandler(event) {
     event.preventDefault();
 
     const enteredEmail = emailRef.current.value;
 
     const data = {
-        email: enteredEmail
+      email: enteredEmail
     };
 
     props.onInvite(data);
@@ -39,7 +33,7 @@ function InviteMember(props) {
         </div>
       </form>
     </div>
-    
+
   );
 }
 

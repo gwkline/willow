@@ -13,14 +13,19 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      login()
+    }
+  }
   const login = () => {
     if (!email) alert("Please enter email");
     signInWithEmailAndPassword(auth, email, password);
-    navigate("/account")
+    navigate("/")
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/account");
+    if (user) navigate("/home");
   }, [user, loading, navigate]);
   return (
     <div className="login">
@@ -34,15 +39,16 @@ function Login() {
         />
         <input
           type="password"
+          onKeyDown={handleKeyDown}
           className="login__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="login__btn" onClick={login}>
+        <button className="login__btn" onKeyDown={handleKeyDown} onClick={login}>
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button className="login__btn login__google"onClick={signInWithGoogle}>
           Login with Google
         </button>
         <div>
