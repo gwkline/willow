@@ -67,7 +67,7 @@ function Projects() {
 
       setIsLoading(false);
       setLoadedProjects(projects);
-      navigate('/projects/')
+      navigate('/projects')
     });
   }, [user, navigate]);
 
@@ -83,7 +83,7 @@ function Projects() {
     const db = getDatabase();
     set(ref(db, 'projects/' + projectData.key), projectData);
     set(ref(db, 'users/' + projectData.owner + '/projects/' + projectData.key), projectData.key)
-    navigate("/projects");
+    navigate("/penis");
     closeModalHandler()
   }
 
