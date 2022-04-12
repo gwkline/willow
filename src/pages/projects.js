@@ -31,13 +31,23 @@ function Projects() {
     //if so, add it to the projects array
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
-      for (let userID in data) {
-        if (userID === user.uid) {
-          for (let projectID in data[userID].projects) {
-            userProjectArray.push(data[userID].projects[projectID]);
+      if (user == null) {
+        return;
+      }
+      else if (userProjectArray == null) {
+        return;
+      }
+      else {
+        const thisUserID = user.uid
+        for (let userID in data) {
+          if (userID === thisUserID) {
+            for (let projectID in data[userID].projects) {
+              userProjectArray.push(data[userID].projects[projectID]);
+            }
           }
         }
       }
+      
     })
 
     onValue(projectRef, (snapshot) => {
@@ -59,7 +69,7 @@ function Projects() {
       setLoadedProjects(projects);
       navigate('/projects/')
     });
-  }, [user.uid, navigate]);
+  }, [user, navigate]);
 
   if (isLoading) {
     return (
@@ -70,7 +80,6 @@ function Projects() {
   }
 
   function addProjectHandler(projectData) {
-    console.log(projectData);
     const db = getDatabase();
     set(ref(db, 'projects/' + projectData.key), projectData);
     set(ref(db, 'users/' + projectData.owner + '/projects/' + projectData.key), projectData.key)
