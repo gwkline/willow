@@ -5,7 +5,7 @@ function TaskList(props) {
     <ul>
       {props.tasks.map((task) => (
         <Task
-          key={task.name}
+          key={task.key}
           name={task.name}
           description={task.description}
           assigned_to={task.assigned_to}
