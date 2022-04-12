@@ -81,6 +81,7 @@ function ProjectItem(props) {
               onClose={closeModalHandler}
               title={props.title}
               description={props.description}
+              //TODO
               key={props.key}
               messages={props.messages}
             />
