@@ -9,6 +9,7 @@ import Account from "./pages/accounts";
 import Login from "./pages/login"
 import Register from "./pages/register";
 import Reset from "./pages/reset";
+import Comments from "./Comments/Comments";
 
 
 function App() {
