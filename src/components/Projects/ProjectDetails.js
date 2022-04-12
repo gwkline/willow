@@ -18,8 +18,8 @@ function ProjectDetails(props) {
       for (const id in data) {
         if (id === props.currProj) {
           const taskList = data[id].tasks;
-          for (const t in taskList) {
-            tasks.push(taskList[t]);
+          for (const task in taskList) {
+            tasks.push(taskList[task]);
           }
         }
         break;
@@ -46,15 +46,6 @@ function ProjectDetails(props) {
     function addTaskHandler(taskProp) {
       const unique_id = uuid();
       const db = getDatabase();
-      let taskList = ref(db, 'projects/' + props.currProj + '/tasks')
-      console.log(taskList);
-      
-      // const newTask = {
-      //   name: taskProp.name,
-      //   description: taskProp.description,
-      //   assigned_to: taskProp.assigned_to,
-      //   status: taskProp.status
-      // };
       const newTask = {
         key: unique_id,
         name: "taskProp.name",
@@ -63,6 +54,12 @@ function ProjectDetails(props) {
         status: "taskProp.status"
       };
       set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), newTask);
+      if (props.tasks == undefined) {
+        props.tasks = [];
+      }
+      else {
+        console.log(props.tasks)
+      }
       props.tasks.push(newTask);
     }
   
