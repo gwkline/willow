@@ -1,12 +1,17 @@
+import { useRef } from "react";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
 import { v4 as uuid } from "uuid";
 
 
 function ProjectDetails(props) {
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [user] = useAuthState(auth);
+  const messageInputRef = useRef();
   const [addingTask, isAddingTask] = useState(false);
 
   useEffect(() => {
@@ -61,6 +66,13 @@ function ProjectDetails(props) {
     props.onClose();
   }
 
+
+  function addMessageHandler() {
+    const message = messageInputRef.current.value;
+    const db = getDatabase();
+    props.messages.push([user.email, message]);
+    set(ref(db, "projects/" + props.currProj + "/messages"), props.messages);
+  }
   function addTaskHandler() {
     console.log(props)
     //console.log(props.tasks)
@@ -76,6 +88,7 @@ function ProjectDetails(props) {
     console.log(newTask);
     //set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), newTask);
     //props.tasks.push(newTask);
+
   }
 
   const assigneeOptions = getProjMembers(props);
@@ -92,6 +105,27 @@ function ProjectDetails(props) {
     <div className="proj-details">
       <h1>{props.title}</h1>
       <p>{props.description}</p>
+      <h2>Messages</h2>
+      <ol>
+        {props.messages.map((elm) => (
+          <p>
+            {elm[0]}...{elm[1]}
+          </p>
+        ))}
+      </ol>
+      <div>
+        <textarea
+          placeholder="Message"
+          rows="3"
+          cols="30"
+          id="message"
+          ref={messageInputRef}
+        />
+      </div>
+      <button className="btn" onClick={addMessageHandler}>
+        Add Message
+      </button>
+        <hr></hr>
       <hr></hr>
       <div>
           <h2>Tasks</h2>
