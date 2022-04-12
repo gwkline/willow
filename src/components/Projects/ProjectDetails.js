@@ -54,11 +54,14 @@ function ProjectDetails(props) {
       const data = snapshot.val();
       for (const userObj in data) {
         let projectList = data[userObj].projects;
+        console.log(projectList);
+        console.log(props.currProj);
         if (Object.keys(projectList).includes(props.currProj)) {
           members.push(data[userObj].email);
         }
       }
     })
+    console.log(members);
     return members;
   }
 
@@ -106,13 +109,13 @@ function ProjectDetails(props) {
       <h1>{props.title}</h1>
       <p>{props.description}</p>
       <h2>Messages</h2>
-      <ol>
+      {/* <ol>
         {props.messages.map((elm) => (
           <p>
             {elm[0]}...{elm[1]}
           </p>
         ))}
-      </ol>
+      </ol> */}
       <div>
         <textarea
           placeholder="Message"
