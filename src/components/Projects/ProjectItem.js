@@ -81,6 +81,7 @@ function ProjectItem(props) {
               onClose={closeModalHandler}
               title={props.title}
               description={props.description}
+              tasks={props.tasks}
             />
           )}
           {modalIsOpen && <Backdrop onClick={closeModalHandler} />}

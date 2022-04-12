@@ -1,6 +1,7 @@
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
+import { v4 as uuid } from "uuid";
 
 function ProjectDetails(props) {
   const [loadedTasks, setLoadedTasks] = useState([]);
@@ -11,16 +12,15 @@ function ProjectDetails(props) {
     setIsLoading(true);
     const db = getDatabase();
     const projectRef = ref(db, 'projects');
+
     onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
       const tasks = [];
       for (const id in data) {
         if (id === props.currProj) {
           const taskList = data[id].tasks;
-          console.log("ids match");
-          for (const t in taskList) {
-            console.log(taskList[t]);
-            tasks.push(taskList[t]);
+          for (const task in taskList) {
+            tasks.push(taskList[task]);
           }
         }
         break;
@@ -29,6 +29,8 @@ function ProjectDetails(props) {
       setIsLoading(false);
     });
   }, [props.currProj]);
+
+
   if (isLoading) {
     return (
       <section>
@@ -71,16 +73,24 @@ function ProjectDetails(props) {
   }
 
 
-    function addTaskHandler(taskDetails) {
-        const db = getDatabase();
-        set(ref(db, 'projects/' + props.currProj + '/tasks'), taskDetails);
-        const newTask = {
-          name: taskDetails.name,
-          description: taskDetails.description,
-          assigned_to: taskDetails.assigned_to,
-          status: taskDetails.status
-        };
-        props.tasks.push(newTask);
+    function addTaskHandler(taskProp) {
+      const unique_id = uuid();
+      const db = getDatabase();
+      const newTask = {
+        key: unique_id,
+        name: "taskProp.name",
+        description: "taskProp.description",
+        assigned_to: "taskProp.assigned_to",
+        status: "taskProp.status"
+      };
+      set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), newTask);
+      if (props.tasks === undefined) {
+        props.tasks = [];
+      }
+      else {
+        console.log(props.tasks)
+      }
+      props.tasks.push(newTask);
     }
 
     const assigneeOptions = getProjMembers(props);

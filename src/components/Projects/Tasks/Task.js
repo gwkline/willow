@@ -1,15 +1,16 @@
-import { getDatabase, update, ref } from "firebase/database";
+//import { getDatabase, update, ref } from "firebase/database";
+
 
 
 function Task(props) {
 
-    function updateStatus(value) {
-        const db = getDatabase();
-        console.log("WORKING")
-        update(ref(db, 'tasks/' + props.id), {
-            status: value
-        })
-    }
+    // function updateStatus(value) {
+    //     const db = getDatabase();
+    //     console.log("WORKING")
+    //     update(ref(db, 'tasks/' + props.id), {
+    //         status: value
+    //     })
+    // }
 
     return (
         <div className="task">
