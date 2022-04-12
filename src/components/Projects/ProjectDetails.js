@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
 import { v4 as uuid } from "uuid";
 
+
 function ProjectDetails(props) {
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [addingTask, isAddingTask] = useState(false);
 
   useEffect(() => {
-    console.log("FIRING")
     setIsLoading(true);
     const db = getDatabase();
     const projectRef = ref(db, 'projects');
@@ -40,32 +40,20 @@ function ProjectDetails(props) {
     );
   }
 
-  function getProjMembers(props) {
+  function getProjMembers() {
     const db = getDatabase();
-    const projectRef = ref(db, 'projects');
     const userRef = ref(db, 'users');
     const members = [];
-    onValue(projectRef, (snapshot) => {
+
+    onValue(userRef, (snapshot) => {
       const data = snapshot.val();
-      //console.log(data); //gives project list
-      for (const projectID in data) {
-        if (projectID === props.currProj) {
-          onValue(userRef, (snapshot) => {
-            const data = snapshot.val();
-            for (let userID in data) {
-              for (let p in data[userID].projects) {
-                if (p === projectID) {
-                  members.push(userID);
-                }
-                break;
-              }
-            }
-          })
+      for (const userObj in data) {
+        let projectList = data[userObj].projects;
+        if (Object.keys(projectList).includes(props.currProj)) {
+          members.push(data[userObj].email);
         }
-        break;
       }
     })
-    //console.log(members);
     return members;
   }
 
@@ -90,7 +78,7 @@ function ProjectDetails(props) {
     //props.tasks.push(newTask);
   }
 
-  const assigneeOptions = ["ThisUser1", "ThisUser2"] //getProjMembers(props);
+  const assigneeOptions = getProjMembers(props);
 
   function addingTaskHandler() {
     isAddingTask(true);
