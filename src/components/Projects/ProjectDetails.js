@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 
 function ProjectDetails(props) {
+  
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [user] = useAuthState(auth);
