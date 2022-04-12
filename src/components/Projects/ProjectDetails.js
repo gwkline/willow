@@ -54,7 +54,7 @@ function ProjectDetails(props) {
         status: "taskProp.status"
       };
       set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), newTask);
-      if (props.tasks == undefined) {
+      if (props.tasks === undefined) {
         props.tasks = [];
       }
       else {
