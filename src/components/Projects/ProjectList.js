@@ -5,12 +5,13 @@ function ProjectList(props) {
     <ul>
       {props.projects.map((project) => (
         <ProjectItem
-          key={project.id}
+          key={project.key}
           id={project.id}
           title={project.title}
           description={project.description}
           users={project.users}
           tasks={project.tasks}
+          messages={project.messages}
         />
       ))}
     </ul>
