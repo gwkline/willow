@@ -62,8 +62,7 @@ function ProjectDetails(props) {
   }
 
   function addTaskHandler() {
-    console.log(props)
-    //console.log(props.tasks)
+
     const unique_id = uuid();
     const db = getDatabase();
     const newTask = {
