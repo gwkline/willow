@@ -81,7 +81,7 @@ function ProjectItem(props) {
               onClose={closeModalHandler}
               title={props.title}
               description={props.description}
-              key={props.key}
+              key={props.projKey}
               messages={props.messages}
             />
           )}

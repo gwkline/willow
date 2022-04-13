@@ -14,7 +14,7 @@ function TaskList(props) {
       <ul className="tasklist">
         {props.tasks.map((task) => (
           <Task
-            key={task.key}
+            taskKey={task.key}
             name={task.name}
             description={task.description}
             assigned_to={task.assigned_to}
