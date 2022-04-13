@@ -1,16 +1,4 @@
-//import { getDatabase, update, ref } from "firebase/database";
-
-
-
 function Task(props) {
-
-    // function updateStatus(value) {
-    //     const db = getDatabase();
-    //     console.log("WORKING")
-    //     update(ref(db, 'tasks/' + props.id), {
-    //         status: value
-    //     })
-    // }
 
     return (
         <div className="task">
@@ -18,9 +6,8 @@ function Task(props) {
             <p>{props.description}</p>
             <label>Assigned To:</label>
             <select className="statusDropdown" name="assigneeDropdown" id="assignee">
-                <option>Member 1</option>
+                <option></option>
             </select>
-
             <div className="statusSelect">
                 <label htmlFor="status">Status:</label>
                 <select className="statusDropdown" name="statusDropdown" id="status">

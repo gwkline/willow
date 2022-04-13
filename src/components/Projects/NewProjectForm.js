@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  auth,
-} from "../../firebase";
+import { auth } from "../../firebase";
 import { v4 as uuid } from "uuid";
 
 function NewProjectForm(props) {
@@ -25,7 +23,7 @@ function NewProjectForm(props) {
       description: enteredDescription,
       owner: user_id,
       messages: [["Name", "Description"]],
-      tasks: [],
+      tasks: [""],
     };
 
     props.onAddProject(projectData);
