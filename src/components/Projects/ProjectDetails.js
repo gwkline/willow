@@ -5,14 +5,17 @@ import TaskList from "./Tasks/TaskList";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { v4 as uuid } from "uuid";
+import NewTask from "./Tasks/NewTask";
+import { useNavigate } from "react-router-dom";
 
 
 function ProjectDetails(props) {
-
+  const navigate = useNavigate();
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [user] = useAuthState(auth);
   const messageInputRef = useRef();
+
   const [addingTask, isAddingTask] = useState(false);
 
   useEffect(() => {
@@ -22,21 +25,20 @@ function ProjectDetails(props) {
 
     onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
-      const tasks = [];
-      for (const id in data) {
-
-        if (id === props.currProj) {
-          const taskList = data[id].tasks;
-          for (const task in taskList) {
-            tasks.push(taskList[task]);
+      const tasks = []
+      for (let projectID in data) {
+        //get list of tasks for this project
+        if (projectID === props.currProj) {
+          let thisTasks = data[projectID].tasks;
+          for (let taskID in thisTasks) {
+            tasks.push(thisTasks[taskID]);
           }
         }
       }
-      setLoadedTasks(tasks);
       setIsLoading(false);
+      setLoadedTasks(tasks);
     });
-  }, [props.currProj]);
-
+  }, [props]);
 
   if (isLoading) {
     return (
@@ -46,42 +48,29 @@ function ProjectDetails(props) {
     );
   }
 
-  function getProjMembers() {
-    const db = getDatabase();
-    const userRef = ref(db, 'users');
-    const members = [];
 
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      for (const userObj in data) {
-        let projectList = data[userObj].projects;
-        if (Object.keys(projectList).includes(props.currProj)) {
-          members.push(data[userObj].email);
-        }
-      }
-    })
-    return members;
-  }
 
   function closeModalHandler() {
     props.onClose();
   }
 
-  function addTaskHandler() {
-    console.log(props)
-    //console.log(props.tasks)
+  function addTaskHandler(props) {
     const unique_id = uuid();
     const db = getDatabase();
-    const newTask = {
-      key: unique_id,
+    props.key = unique_id;
+    const taskToAdd = {
+      key: props.key,
       name: props.name,
       description: props.description,
       assigned_to: props.assigned_to,
       status: props.status
     };
-    console.log(newTask);
-    //set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), newTask);
-    //props.tasks.push(newTask);
+    console.log(Object.keys(props))
+    set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), taskToAdd)
+    isAddingTask(false);
+    props.curTask = taskToAdd;
+
+
   }
 
   function addMessageHandler() {
@@ -91,14 +80,8 @@ function ProjectDetails(props) {
     set(ref(db, "projects/" + props.currProj + "/messages"), props.messages);
   }
 
-  const assigneeOptions = getProjMembers(props);
-
   function addingTaskHandler() {
     isAddingTask(true);
-  }
-
-  function closeAddTask() {
-    isAddingTask(false);
   }
 
   return (
@@ -131,26 +114,12 @@ function ProjectDetails(props) {
         <button onClick={addingTaskHandler}>Add Task {'+'}</button>
       </div>
       <div>
-        {addingTask && (<form className="addTaskForm">
-          <label>Name: </label>
-          <input type="text" />
-          <label>Description: </label>
-          <input type="text" />
-          <label>Assigned To:</label>
-          <select name="selectAssignee">
-            {assigneeOptions.map(item => {
-              return (<option key={item} value={item}>{item}</option>);
-            })}
-          </select>
-          <label>Status: </label>
-          <select name="selectStatus">
-            <option default value="new">New</option>
-            <option value="in_progress">In Progress</option>
-            <option value="complete">Completed</option>
-          </select>
-          <button onClick={addTaskHandler}>Add</button>
-          <button onClick={closeAddTask}>Cancel</button>
-        </form>)}
+        {addingTask && (
+          <NewTask
+            onAddTask={addTaskHandler}
+            currProj={props.currProj}
+          />
+        )}
       </div>
       <hr></hr>
       <div>
