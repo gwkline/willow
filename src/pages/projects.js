@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  auth,
-} from "../firebase";
+import { auth } from "../firebase";
 import React from "react";
 import NewProjectForm from "../components/Projects/NewProjectForm";
 import ProjectList from "../components/Projects/ProjectList";
@@ -17,7 +15,6 @@ function Projects() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
-
 
 
   useEffect(() => {
@@ -47,12 +44,11 @@ function Projects() {
           }
         }
       }
-      
+
     })
 
     onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
-      //console.log(data); //gives project list
       const projects = []
       for (const projectID in data) {
         if (userProjectArray.includes(projectID)) {
@@ -64,7 +60,6 @@ function Projects() {
           projects.push(project);
         }
       }
-
       setIsLoading(false);
       setLoadedProjects(projects);
       navigate('/projects')
