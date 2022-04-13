@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProjectDetails from "./ProjectDetails";
 import Backdrop from "../Backdrop";
-import { getDatabase, ref, update, onValue, set } from "firebase/database";
+import { getDatabase, ref, update, onValue, set, get } from "firebase/database";
 import InviteMember from "./InviteMember";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
@@ -32,37 +32,37 @@ function ProjectItem(props) {
     const updates = {};
 
     const projectRef = ref(db, 'projects');
-    updates['/projects/' + props.id] = null;
-    update(ref(db), updates);
+    // updates['/projects/' + props.id] = null;
+    // update(ref(db), updates);
 
 
     const userRef = ref(db, 'users');
 
     onValue(projectRef, (snapshot) => {
       const projects = snapshot.val();
-      const project = projects[props.id];
-      if (project.owner === user.uid) {
-        console.log("Project owner is the same as the current user, deleting project")
-        updates['/projects/' + props.id] = null;
-        update(ref(db), updates);
-
-        onValue(userRef, (snapshot) => {
-          const data = snapshot.val();
-          for (let userID in data) {
-            for (let thisProject in data[userID].projects) {
-              //check if the current project is the one to be deleted
-              //make sure the person deleting the project is the project owner
-              if (thisProject === project.key) {
-                console.log("Found the project to be deleted in the user's project list")
-                set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
+      for (let project in projects) {
+        if (projects[project].owner === user.uid) {
+          get(userRef).then((snapshot) => {
+            const data = snapshot.val();
+            for (let userID in data) {
+              for (let thisProject in data[userID].projects) {
+                //check if the current project is the one to be deleted
+                //make sure the person deleting the project is the project owner
+                if (thisProject === props.id) {
+                  set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
+                }
               }
             }
-          }
-        })
-      }
+          })
 
-      else {
-        console.log("Project owner is not the same as the current user, not deleting project")
+          updates['/projects/' + props.id] = null;
+          update(ref(db), updates);
+        }
+
+        else {
+          console.log("Project owner is not the same as the current user, not deleting project")
+        }
+
       }
     });
   }
@@ -94,7 +94,7 @@ function ProjectItem(props) {
   function leaveProjectHandler() {
     const db = getDatabase();
     const updates = {};
-    updates['/projects/' + props.id] = null;
+    updates['/users/' + user.uid + `/projects/` + props.id] = null;
     return update(ref(db), updates);
   }
 
