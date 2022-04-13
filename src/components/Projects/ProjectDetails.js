@@ -121,9 +121,7 @@ function ProjectDetails(props) {
           />
         )}
       </div>
-      <hr></hr>
       <div>
-        TaskList here
         <TaskList tasks={loadedTasks} />
       </div>
 
