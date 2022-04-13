@@ -3,6 +3,8 @@ import ProjectDetails from "./ProjectDetails";
 import Backdrop from "../Backdrop";
 import { getDatabase, ref, update, onValue, set } from "firebase/database";
 import InviteMember from "./InviteMember";
+import LeaveProject from "./LeaveProject";
+import ProjectList from "./ProjectList";
 
 
 function ProjectItem(props) {
@@ -22,6 +24,7 @@ function ProjectItem(props) {
   function deleteHandler() {
     const db = getDatabase();
     const updates = {};
+    const thisUser = user?.userID
     updates['/projects/' + props.id] = null;
     update(ref(db), updates);
 
@@ -62,6 +65,13 @@ function ProjectItem(props) {
 
   }
 
+  function leaveProjectHandler(){
+    const db = getDatabase();
+    const updates = {};
+    updates['/projects/' + props.id] = null;
+    return update(ref(db), updates);
+  }
+
   return (
     <>
       <li className="proj-display" style={{ listStyle: 'none' }}>
@@ -70,10 +80,13 @@ function ProjectItem(props) {
           <p>{props.description}</p>
         </div>
         <div>
-          <button onClick={viewHandler}>View Project {'>'}</button>
-          <button onClick={deleteHandler}>Delete Project {'X'}</button>
-          <button onClick={inviteHandler}>Invite Member {'+'}</button>
-        </div>
+
+        <button onClick={viewHandler}>View Project {'>'}</button>
+        <button onClick={deleteHandler}>Delete Project {'X'}</button>
+        <button onClick={inviteHandler}>Invite Member {'+'}</button>
+        <button onClick={leaveProjectHandler}>Leave Project {'-'}</button>
+      </div>
+
         <div>
           {modalIsOpen && (
             <ProjectDetails
