@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import { auth, db, logout } from "../firebase";
+import { auth, logout } from "../firebase";
 import ProjectList from "../components/Projects/ProjectList";
 
 
 function Account() {
   
-const [loadedProjects, setLoadedProjects] = useState([]);
+const [loadedProjects ] = useState([]);
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/register");
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   return (
     <div className="dashboard">

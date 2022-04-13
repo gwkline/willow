@@ -253,6 +253,52 @@ label {
   margin-top: 7px;
 }
 
+.task {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 10px;
+}
+
+.statusSelect {
+  display: inline-flex;
+}
+
+.statusDropdown {
+  margin-left: 5px;
+}
+
 textarea {
   resize: none;
+}
+
+.proj-details {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  z-index: 10;
+  top: 20vh;
+  left: calc(50% - 15rem);
+  width: 50rem;
+  position: fixed;
+}
+
+.addTaskForm {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tasklist {
+  width: 100%;
+}
+
+.tasklist-header {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  padding-left: 10px;
 }

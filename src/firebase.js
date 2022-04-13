@@ -39,7 +39,6 @@ const signInWithGoogle = async () => {
                 const userData = {
                     uid: result.user.uid,
                     email: result.user.email,
-                    projects: [""]
                 }
 
                 const dbRef = ref(getDatabase());
@@ -53,12 +52,14 @@ const signInWithGoogle = async () => {
                     }
                 }).catch((error) => {
                     console.error(error);
+                    alert(error.message);
                 });
 
                 return updateProfile(result.user, { displayName: result.user.displayName })
 
             }).catch(function (error) {
                 console.log(error);
+                alert(error.message);
             });
 
 
@@ -93,6 +94,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 
             }).catch(function (error) {
                 console.log(error);
+                alert(error.message);
             });
 
     } catch (err) {

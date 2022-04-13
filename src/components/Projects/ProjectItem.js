@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Modal from "../Modal";
+import ProjectDetails from "./ProjectDetails";
 import Backdrop from "../Backdrop";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, update, onValue, set } from "firebase/database";
 import InviteMember from "./InviteMember";
 import LeaveProject from "./LeaveProject";
 import ProjectList from "./ProjectList";
@@ -26,18 +26,43 @@ function ProjectItem(props) {
     const updates = {};
     const thisUser = user?.userID
     updates['/projects/' + props.id] = null;
-    return update(ref(db), updates);
+    update(ref(db), updates);
+
+    const userRef = ref(db, 'users');
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      for (let userID in data) {
+        for (let project in data[userID].projects) {
+          if (project === props.id) {
+            set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
+          }
+        }
+      }
+    })
+
   }
 
   function inviteHandler() {
     openInviteModal(true);
   }
 
+  function addMember(email) {
+    const db = getDatabase();
+    const userRef = ref(db, 'users');
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      for (let userID in data) {
+        if (data[userID].email === email.email) {
+          set(ref(db, 'users/' + userID + '/projects/' + props.id), props.id)
+        }
+      }
+    })
+  }
+
   function inviteMemberHandler(email) {
-    console.log(email);
-    //addMember(email);
+    addMember(email);
     openInviteModal(false);
-    
+
   }
 
   function leaveProjectHandler(){
@@ -49,23 +74,28 @@ function ProjectItem(props) {
 
   return (
     <>
-      <li className="proj-display" style={{listStyle:'none'}}>
+      <li className="proj-display" style={{ listStyle: 'none' }}>
         <div>
           <h1>{props.title}</h1>
           <p>{props.description}</p>
         </div>
         <div>
+
         <button onClick={viewHandler}>View Project {'>'}</button>
         <button onClick={deleteHandler}>Delete Project {'X'}</button>
         <button onClick={inviteHandler}>Invite Member {'+'}</button>
         <button onClick={leaveProjectHandler}>Leave Project {'-'}</button>
       </div>
+
         <div>
           {modalIsOpen && (
-            <Modal
+            <ProjectDetails
+              currProj={props.id}
               onClose={closeModalHandler}
               title={props.title}
               description={props.description}
+              key={props.projKey}
+              messages={props.messages}
             />
           )}
           {modalIsOpen && <Backdrop onClick={closeModalHandler} />}
@@ -82,7 +112,7 @@ function ProjectItem(props) {
         </div>
       </li>
     </>
-    
+
   );
 }
 
