@@ -1,44 +1,48 @@
 import { useRef } from "react";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TaskList from "./Tasks/TaskList";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import NewTask from "./Tasks/NewTask";
-import { useNavigate } from "react-router-dom";
+
 
 
 function ProjectDetails(props) {
-  const navigate = useNavigate();
-  const [loadedTasks, setLoadedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadedTasks, setLoadedTasks] = useState([]);
+  const [addingTask, isAddingTask] = useState(false);
+  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const messageInputRef = useRef();
 
-  const [addingTask, isAddingTask] = useState(false);
 
   useEffect(() => {
+    let projectTaskArray = [];
     setIsLoading(true);
     const db = getDatabase();
-    const projectRef = ref(db, 'projects');
+    const taskRef = ref(db, 'projects' + '/' + props.currProj);
 
-    onValue(projectRef, (snapshot) => {
+    onValue(taskRef, (snapshot) => {
       const data = snapshot.val();
       const tasks = []
-      for (let projectID in data) {
-        //get list of tasks for this project
-        if (projectID === props.currProj) {
-          let thisTasks = data[projectID].tasks;
-          for (let taskID in thisTasks) {
-            tasks.push(thisTasks[taskID]);
-          }
-        }
+      for (const taskID in data.tasks) {
+        console.log(taskID);
+        const task = {
+          key: taskID,
+          ...data.tasks[taskID]
+        };
+
+        tasks.push(task);
       }
-      setIsLoading(false);
+
+
       setLoadedTasks(tasks);
+      setIsLoading(false);
     });
-  }, [props]);
+  }, [user, navigate]);
 
   if (isLoading) {
     return (
@@ -65,7 +69,6 @@ function ProjectDetails(props) {
       assigned_to: props.assigned_to,
       status: props.status
     };
-    console.log(Object.keys(props))
     set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), taskToAdd)
     isAddingTask(false);
     props.curTask = taskToAdd;
@@ -124,7 +127,6 @@ function ProjectDetails(props) {
       <div>
         <TaskList tasks={loadedTasks} />
       </div>
-
       <button className="btn btn--alt">Do Something</button>
       <button className="btn" onClick={closeModalHandler}>
         Close Modal

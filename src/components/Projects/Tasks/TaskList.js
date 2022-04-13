@@ -1,6 +1,7 @@
 import Task from "./Task";
 
 function TaskList(props) {
+  console.log(props.tasks)
   return (
     <>
     <div className="tasklist-header">
