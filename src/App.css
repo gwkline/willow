@@ -255,8 +255,10 @@ label {
 
 .task {
   display: flex;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding-left: 10px;
 }
 
 .statusSelect {
@@ -288,4 +290,15 @@ textarea {
   margin-top: 10px;
   display: flex;
   justify-content: space-around;
+}
+
+.tasklist {
+  width: 100%;
+}
+
+.tasklist-header {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  padding-left: 10px;
 }
