@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
       <div className="homepagecontents">
-        <card>
+        <div className="card">
           <h2>Welcome to Willow</h2>
           <div>Your brand new project management tool</div>
           <div>Willow helps you create projects, assign tasks, and stay on top of solo or collaborative projects!</div>
@@ -15,12 +15,12 @@ function Home() {
           <div><Comments
             commentsUrl="http://localhost:3004/comments"
             currentUserId="1"
-      /></div>
+          /></div>
           <div>
             <img src={leaf} alt="img" height={45} width={45}></img>
             <h1>Willow</h1>
           </div>
-        </card>
+        </div>
       </div>
     </div>
   );
