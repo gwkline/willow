@@ -5,8 +5,8 @@ import {
 } from "../../firebase";
 
 function LeaveProject(props) {
-  const emailRef = useRef();
-  const [user] = useAuthState(auth);
+  // const emailRef = useRef();
+  // const [user] = useAuthState(auth);
 
   function submitHandler(event) {
     event.preventDefault();
@@ -27,7 +27,7 @@ function LeaveProject(props) {
         </div>
       </form>
     </div>
-    
+
   );
 }
 
