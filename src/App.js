@@ -9,7 +9,7 @@ import Account from "./pages/accounts";
 import Login from "./pages/login"
 import Register from "./pages/register";
 import Reset from "./pages/reset";
-import Comments from "./Comments/Comments";
+//import Comments from "./Comments/Comments";
 
 
 function App() {
@@ -26,8 +26,8 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/account" element={<Account />} />
         </Routes>
-    </Router>
-    <footer></footer>
+      </Router>
+      <footer></footer>
     </>
 
   );

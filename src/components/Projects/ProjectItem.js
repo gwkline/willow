@@ -5,8 +5,8 @@ import { getDatabase, ref, update, onValue, set } from "firebase/database";
 import InviteMember from "./InviteMember";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
-import LeaveProject from "./LeaveProject";
-import ProjectList from "./ProjectList";
+// import LeaveProject from "./LeaveProject";
+// import ProjectList from "./ProjectList";
 
 
 
@@ -32,7 +32,6 @@ function ProjectItem(props) {
     const updates = {};
 
     const projectRef = ref(db, 'projects');
-    const thisUser = user?.userID
     updates['/projects/' + props.id] = null;
     update(ref(db), updates);
 
@@ -92,7 +91,7 @@ function ProjectItem(props) {
 
   }
 
-  function leaveProjectHandler(){
+  function leaveProjectHandler() {
     const db = getDatabase();
     const updates = {};
     updates['/projects/' + props.id] = null;
@@ -108,11 +107,11 @@ function ProjectItem(props) {
         </div>
         <div>
 
-        <button onClick={viewHandler}>View Project {'>'}</button>
-        <button onClick={deleteHandler}>Delete Project {'X'}</button>
-        <button onClick={inviteHandler}>Invite Member {'+'}</button>
-        <button onClick={leaveProjectHandler}>Leave Project {'-'}</button>
-      </div>
+          <button onClick={viewHandler}>View Project {'>'}</button>
+          <button onClick={deleteHandler}>Delete Project {'X'}</button>
+          <button onClick={inviteHandler}>Invite Member {'+'}</button>
+          <button onClick={leaveProjectHandler}>Leave Project {'-'}</button>
+        </div>
 
         <div>
           {modalIsOpen && (

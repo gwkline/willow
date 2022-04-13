@@ -23,7 +23,7 @@ function ProjectDetails(props) {
     // let projectTaskArray = [];
     setIsLoading(true);
     const db = getDatabase();
-    const taskRef = ref(db, 'projects' + '/' + props.currProj);
+    const taskRef = ref(db, 'projects/' + props.currProj);
 
     onValue(taskRef, (snapshot) => {
       const data = snapshot.val();
@@ -42,7 +42,7 @@ function ProjectDetails(props) {
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, [user, navigate]);
+  }, [user, navigate, props.currProj]);
 
   if (isLoading) {
     return (
