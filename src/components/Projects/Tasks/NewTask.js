@@ -7,7 +7,7 @@ function NewTask(props) {
     const taskDescRef = useRef();
     const taskAssigneeRef = useRef();
     const taskStatusRef = useRef();
-    const [isAddingTask] = useState(false);
+    const [addingTask, isAddingTask] = useState(false);
 
 
     function submitHandler(event) {
@@ -53,11 +53,14 @@ function NewTask(props) {
 
     function closeAddTask() {
         isAddingTask(false);
+        return () => {
+            isAddingTask(true);
+        }
 
     }
 
     return (
-        <form className="addTaskForm">
+        <div className="addTaskForm">
             <label>Name: </label>
             <input type="text" ref={taskNameRef} />
             <label>Description: </label>
@@ -76,8 +79,7 @@ function NewTask(props) {
             </select>
             <button onClick={submitHandler}>Add</button>
             <button onClick={closeAddTask}>Cancel</button>
-        </form>
-
+        </div>
     );
 }
 

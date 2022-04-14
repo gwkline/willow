@@ -13,7 +13,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading] = useAuthState(auth);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       register()
@@ -22,12 +22,15 @@ function Register() {
   const register = async () => {
     if (!name) alert("Please enter name");
     else registerWithEmailAndPassword(name, email, password)
-    history("/account")
+    navigate("/account")
   };
+
   useEffect(() => {
+    console.log("register.js: useEffect");
     if (loading) return;
-    if (user) history("/account");
-  }, [user, loading, history]);
+    if (user) navigate("/account");
+  }, [user, loading, navigate]);
+
   return (
     <div className="register">
       <div className="register__container">

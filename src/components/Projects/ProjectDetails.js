@@ -12,13 +12,13 @@ function ProjectDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [addingTask, isAddingTask] = useState(false);
-  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const messageInputRef = useRef();
   const titleInputRef = useRef();
   const descriptionInputRef = useRef();
 
   useEffect(() => {
+    console.log("projectDetails.js: useEffect");
     setIsLoading(true);
     const db = getDatabase();
 
@@ -42,7 +42,7 @@ function ProjectDetails(props) {
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, [user, navigate, props.currProj]);
+  }, [user, props.currProj]);
 
   if (isLoading) {
     return (
@@ -133,7 +133,6 @@ function ProjectDetails(props) {
           </button>
         </div>
       </div>
-
       <div className="project_messages">
         <div>
           <h2>Messages</h2>
