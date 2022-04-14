@@ -20,7 +20,6 @@ function ProjectDetails(props) {
 
 
   useEffect(() => {
-    // let projectTaskArray = [];
     setIsLoading(true);
     const db = getDatabase();
     const taskRef = ref(db, 'projects/' + props.currProj);

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set } from "firebase/database";
 
 function Task(props) {
     const taskAssigneeRef = useRef();
@@ -38,6 +38,40 @@ function Task(props) {
             }
         })
         return members;
+    }
+
+    //deletes the task passed in props
+    function deleteTask() {
+        let db = getDatabase();
+        let projectRef = ref(db, 'projects');
+        for (let projectID in projectRef) {
+            if (projectRef[projectID].tasks) {
+                if (Object.keys(projectRef[projectID].tasks).includes(props.taskKey)) {
+                    set(ref(db, 'projects/' + projectID + '/tasks/' + props.taskKey), null);
+                }
+            }
+        }
+    }
+
+    //updates the task passed in props
+    function updateTask() {
+        let db = getDatabase();
+        let projectRef = ref(db, 'projects');
+        for (let projectID in projectRef) {
+            if (projectRef[projectID].tasks) {
+                if (Object.keys(projectRef[projectID].tasks).includes(props.taskKey)) {
+
+                    let newTask = {
+                        key: props.taskKey,
+                        name: props.name,
+                        description: props.description,
+                        assigned_to: props.assigned_to,
+                        status: props.status,
+                    }
+                    set(ref(db, 'projects/' + projectID + '/tasks/' + props.taskKey), newTask);
+                }
+            }
+        }
     }
 
 
