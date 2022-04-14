@@ -57,6 +57,13 @@ function ProjectDetails(props) {
   }
 
   function addTaskHandler(props) {
+
+    if (props.name === "" || props.description === "" || props.assigned_to === "" || props.status === "") {
+      alert("Please fill out all fields");
+      return;
+    }
+
+
     const unique_id = uuid();
     const db = getDatabase();
     props.key = unique_id;
