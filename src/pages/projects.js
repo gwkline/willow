@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, get } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
@@ -18,6 +18,7 @@ function Projects() {
 
 
   useEffect(() => {
+    console.log("projects.js: useEffect");
     let userProjectArray = [];
     setIsLoading(true);
     const db = getDatabase();

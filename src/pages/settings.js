@@ -8,7 +8,7 @@ function testAlert() {
 
 function Settings() {
   return (
-    <div>className="settingsPageContents"
+    <div className="settingsPageContents">
       <div>
         <h1 className="page-title">This is the Settings page</h1>
       </div>
@@ -29,7 +29,6 @@ function Settings() {
       </button>
       
     </div>
-
 
   );
 };

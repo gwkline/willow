@@ -8,10 +8,13 @@ function Reset() {
   const [email, setEmail] = useState("");
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
+
   useEffect(() => {
+    console.log("reset.js: useEffect");
     if (loading) return;
     if (user) navigate("/dashboard");
   }, [user, loading, navigate]);
+
   return (
     <div className="reset">
       <div className="reset__container">
