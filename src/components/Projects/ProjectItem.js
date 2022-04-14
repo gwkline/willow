@@ -36,7 +36,7 @@ function ProjectItem(props) {
 
     const userRef = ref(db, 'users');
 
-    onValue(projectRef, (snapshot) => {
+    get(projectRef).then((snapshot) => {
       const projects = snapshot.val();
       for (let project in projects) {
         if (projects[project].owner === user.uid) {
