@@ -24,8 +24,9 @@ function ProjectItem(props) {
   function deleteHandler() {
     const db = getDatabase();
     const updates = {};
-    const thisUser = user?.userID
+    //const thisUser = user?.userID
     updates['/projects/' + props.id] = null;
+    alert("Project has been deleted");
     update(ref(db), updates);
 
     const userRef = ref(db, 'users');
@@ -62,6 +63,7 @@ function ProjectItem(props) {
   function inviteMemberHandler(email) {
     addMember(email);
     openInviteModal(false);
+    alert("Member invited to project!");
 
   }
 
@@ -69,6 +71,7 @@ function ProjectItem(props) {
     const db = getDatabase();
     const updates = {};
     updates['/projects/' + props.id] = null;
+    alert("Successfully left the project");
     return update(ref(db), updates);
   }
 

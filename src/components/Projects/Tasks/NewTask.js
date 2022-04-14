@@ -30,6 +30,7 @@ function NewTask(props) {
         }
 
         props.onAddTask(taskDetails);
+        alert("Adding task successful!");
     }
 
     const assigneeOptions = getProjMembers(props);

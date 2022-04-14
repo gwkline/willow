@@ -79,7 +79,8 @@ function Projects() {
     set(ref(db, 'projects/' + projectData.key), projectData);
     set(ref(db, 'users/' + projectData.owner + '/projects/' + projectData.key), projectData.key)
     navigate("/projects");
-    closeModalHandler()
+    closeModalHandler();
+    alert("Successfully created a new project!");
   }
 
 
