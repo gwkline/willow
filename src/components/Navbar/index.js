@@ -13,7 +13,7 @@ const Navbar = () => {
         <Nav>
           <NavTitle>
             <img src={leaf} alt="img" height={45} width={45}></img>
-            <h1>Willow</h1>
+            <h1><a href="/">Willow</a></h1>
           </NavTitle>
           <NavMenu>
             <NavLink to="/">
