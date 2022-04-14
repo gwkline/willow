@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getDatabase, ref, set, onValue, get } from "firebase/database";
+import { getDatabase, ref, set, onValue, get, update } from "firebase/database";
 import { useState, useEffect } from "react";
 import TaskList from "./Tasks/TaskList";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -99,13 +99,33 @@ function ProjectDetails(props) {
   function changeDetailsHandler() {
     const newTitle = titleInputRef.current.value;
     const newDescription = descriptionInputRef.current.value;
+    const db = getDatabase();
+
     if (newTitle === "" || newDescription === "") {
       alert("Please fill out all fields");
       return;
     }
-    const db = getDatabase();
-    set(ref(db, "projects/" + props.currProj + "/title"), newTitle);
-    set(ref(db, "projects/" + props.currProj + "/description"), newDescription);
+
+    const projectRef = ref(db, 'projects');
+
+    get(projectRef).then((snapshot) => {
+      const projects = snapshot.val();
+      for (let project in projects) {
+        if (project === props.currProj) {
+
+          if (projects[project].owner === user.uid) {
+            set(ref(db, "projects/" + props.currProj + "/title"), newTitle);
+            set(ref(db, "projects/" + props.currProj + "/description"), newDescription);
+            alert("Project details have been edited");
+          } 
+        
+          else {
+              alert("You must be the owner of a project to edit it");
+          }
+        }
+      }
+    });
+  
   }
 
   function addingTaskHandler() {
