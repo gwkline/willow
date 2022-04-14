@@ -30,11 +30,9 @@ function ProjectItem(props) {
 
     const db = getDatabase();
     const updates = {};
-
     const projectRef = ref(db, 'projects');
     // updates['/projects/' + props.id] = null;
     // update(ref(db), updates);
-
 
     const userRef = ref(db, 'users');
 
@@ -50,6 +48,7 @@ function ProjectItem(props) {
                 //make sure the person deleting the project is the project owner
                 if (thisProject === props.id) {
                   set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
+                  alert("Project has been deleted");
                 }
               }
             }
@@ -90,6 +89,7 @@ function ProjectItem(props) {
   function inviteMemberHandler(email) {
     addMember(email);
     openInviteModal(false);
+    alert("Member invited to project!");
 
   }
 
@@ -97,6 +97,8 @@ function ProjectItem(props) {
     const db = getDatabase();
     const updates = {};
     updates['/users/' + user.uid + `/projects/` + props.id] = null;
+     alert("Successfully left the project");
+
     return update(ref(db), updates);
   }
 

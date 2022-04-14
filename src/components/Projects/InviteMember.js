@@ -12,11 +12,13 @@ function InviteMember(props) {
     };
 
     props.onInvite(data);
+    
   }
 
   function closeModalHandler() {
     props.onClose();
   }
+  alert("New task created");
 
   return (
     <div className="modal">
