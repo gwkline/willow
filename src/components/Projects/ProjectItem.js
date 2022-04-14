@@ -31,39 +31,32 @@ function ProjectItem(props) {
     const db = getDatabase();
     const updates = {};
     const projectRef = ref(db, 'projects');
-    // updates['/projects/' + props.id] = null;
-    // update(ref(db), updates);
-
     const userRef = ref(db, 'users');
 
     get(projectRef).then((snapshot) => {
       const projects = snapshot.val();
       for (let project in projects) {
-        if (projects[project].owner === user.uid) {
-          get(userRef).then((snapshot) => {
-            const data = snapshot.val();
-            for (let userID in data) {
-              for (let thisProject in data[userID].projects) {
-                //check if the current project is the one to be deleted
-                //make sure the person deleting the project is the project owner
-                if (thisProject === props.id) {
-                  set(ref(db, 'users/' + userID + '/projects/' + props.id), null)
-                  
+        if (project === props.projKey) {
+          if (projects[project].owner === user.uid) {
+            console.log("NICE")
+            get(userRef).then((snapshot) => {
+              const data = snapshot.val();
+              for (let userID in data) {
+                for (let thisProject in data[userID].projects) {
+                  if (thisProject === props.projKey) {
+                    set(ref(db, 'users/' + userID + '/projects/' + props.projKey), null)
+                    updates['/projects/' + props.projKey] = null;
+                    update(ref(db), updates);
+                    return
+                  }
                 }
               }
-            }
-          })
-
-          updates['/projects/' + props.id] = null;
-          update(ref(db), updates);
-          alert("Project has been deleted");
-        }
-
-        else {
-          if (projects[project].key === props.id) {
-            alert("You must be the owner of a project to delete it");
+            })
           }
-        }
+          else {
+              alert("You must be the owner of a project to delete it");
+          }
+      }
 
       }
     });
@@ -97,9 +90,9 @@ function ProjectItem(props) {
   function leaveProjectHandler() {
     const db = getDatabase();
     const updates = {};
-    updates['/users/' + user.uid + `/projects/` + props.id] = null;
-     alert("Successfully left the project");
-
+    updates['/users/' + user.uid + `/projects/` + props.currProj] = null;
+    update(ref(db), updates);
+    alert("Successfully left the project");
     return update(ref(db), updates);
   }
 
