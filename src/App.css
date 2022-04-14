@@ -281,8 +281,7 @@ textarea {
   text-align: center;
   z-index: 10;
   top: 20vh;
-  left: calc(50% - 15rem);
-  width: 50rem;
+  width: 80%;
   position: fixed;
 }
 

@@ -50,23 +50,23 @@ function Task(props) {
         <div className="task">
             <p>{props.name}</p>
             <p>{props.description}</p>
-
             <div className="statusSelect">
-              <label>Assigned To:</label>
               <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" id="assignee">
                   {assigneeOptions.map(item => {
                       return (<option key={item} value={item}>{item}</option>);
                   })}
               </select>
             </div>
-
             <div className="statusSelect">
-                <label htmlFor="status">Status:</label>
                 <select className="statusDropdown" name="statusDropdown" id="status">
                     <option value="new">New</option>
                     <option value="in_progress">In Progress</option>
                     <option value="complete">Complete</option>
                 </select>
+            </div>
+            <div style={{display: 'flex'}}>
+                <button>X</button>
+                <button>⟳</button>
             </div>
         </div>
     )
