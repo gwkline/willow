@@ -190,6 +190,7 @@ function ProjectDetails(props) {
           </button>
         </div>
       </div>
+      <hr></hr>
       <div className="project_tasks">
         <div>
           <h2>Tasks</h2>
@@ -200,9 +201,12 @@ function ProjectDetails(props) {
             <NewTask onAddTask={addTaskHandler} currProj={props.currProj} />
           )}
         </div>
+        <br></br>
+        <br></br>
         <div>
           <TaskList tasks={loadedTasks} />
         </div>
+        <br></br>
         <button className="btn" onClick={closeModalHandler}>
           Close Modal
         </button>
