@@ -56,10 +56,9 @@ function ProjectItem(props) {
           else {
               alert("You must be the owner of a project to delete it");
           }
+        }
       }
-
-      }
-    });
+    })
   }
 
 

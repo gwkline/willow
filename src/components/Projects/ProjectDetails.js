@@ -94,6 +94,7 @@ function ProjectDetails(props) {
     const db = getDatabase();
     props.messages.push([user.email, message]);
     set(ref(db, "projects/" + props.currProj + "/messages"), props.messages);
+    messageInputRef.current.value = "";
   }
 
   function changeDetailsHandler() {
@@ -116,6 +117,8 @@ function ProjectDetails(props) {
           if (projects[project].owner === user.uid) {
             set(ref(db, "projects/" + props.currProj + "/title"), newTitle);
             set(ref(db, "projects/" + props.currProj + "/description"), newDescription);
+            titleInputRef.current.value = "";
+            descriptionInputRef.current.value = "";
             alert("Project details have been edited");
           } 
         
