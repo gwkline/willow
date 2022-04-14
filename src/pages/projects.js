@@ -27,7 +27,7 @@ function Projects() {
 
     //Check if the current user's project list has changed
     //if so, add it to the projects array
-    get(userRef, (snapshot) => {
+    onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       if (user == null) {
         return;
@@ -48,7 +48,7 @@ function Projects() {
 
     })
 
-    get(projectRef, (snapshot) => {
+    onValue(projectRef, (snapshot) => {
       const data = snapshot.val();
       const projects = []
       for (const projectID in data) {
