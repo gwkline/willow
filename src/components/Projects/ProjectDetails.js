@@ -8,27 +8,28 @@ import { auth } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import NewTask from "./Tasks/NewTask";
 
-
-
 function ProjectDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [addingTask, isAddingTask] = useState(false);
-  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const messageInputRef = useRef();
-
+  const titleInputRef = useRef();
+  const descriptionInputRef = useRef();
 
   useEffect(() => {
+    console.log("projectDetails.js: useEffect");
     setIsLoading(true);
     const db = getDatabase();
+
     const taskRef = ref(db, 'projects/' + props.currProj);
 
     onValue(taskRef, (snapshot) => {
       const data = snapshot.val();
-      const tasks = []
+      const tasks = [];
       for (const taskID in data.tasks) {
-        if (taskID != "0") {
+
+        if (taskID !== "0") {
           const task = {
             key: taskID,
             ...data.tasks[taskID]
@@ -41,7 +42,7 @@ function ProjectDetails(props) {
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, [user, navigate, props.currProj]);
+  }, [user, props.currProj]);
 
   if (isLoading) {
     return (
@@ -50,8 +51,6 @@ function ProjectDetails(props) {
       </section>
     );
   }
-
-
 
   function closeModalHandler() {
     props.onClose();
@@ -66,7 +65,7 @@ function ProjectDetails(props) {
       name: props.name,
       description: props.description,
       assigned_to: props.assigned_to,
-      status: props.status
+      status: props.status,
     };
 
     set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), taskToAdd)
@@ -91,55 +90,91 @@ function ProjectDetails(props) {
     set(ref(db, "projects/" + props.currProj + "/messages"), props.messages);
   }
 
+  function changeDetailsHandler() {
+    const newTitle = titleInputRef.current.value;
+    const newDescription = descriptionInputRef.current.value;
+    const db = getDatabase();
+    set(ref(db, "projects/" + props.currProj + "/title"), newTitle);
+    set(ref(db, "projects/" + props.currProj + "/description"), newDescription);
+  }
+
   function addingTaskHandler() {
     isAddingTask(true);
   }
 
   return (
     <div className="proj-details">
-      <h1>{props.title}</h1>
-      <p>{props.description}</p>
-      <h2>Messages</h2>
-      <ol>
-        {props.messages.map((elm) => (
-          <p>
-            {elm[0]}...{elm[1]}
-          </p>
-        ))}
-      </ol>
-      <div>
-        <textarea
-          placeholder="Message"
-          rows="3"
-          cols="30"
-          id="message"
-          ref={messageInputRef}
-        />
+      <div className="project_header">
+        <div>
+          <h1>{props.title}</h1>
+          <p>{props.description}</p>
+        </div>
+        <div>
+          <div>
+            <textarea
+              placeholder="New Title"
+              rows="1"
+              cols="30"
+              id="message"
+              ref={titleInputRef}
+            />
+          </div>
+          <div>
+            <textarea
+              placeholder="New Description"
+              rows="3"
+              cols="50"
+              id="message"
+              ref={descriptionInputRef}
+            />
+          </div>
+          <button className="btn" onClick={changeDetailsHandler}>
+            Change Project Details
+          </button>
+        </div>
       </div>
-      <button className="btn" onClick={addMessageHandler}>
-        Add Message
-      </button>
-      <hr></hr>
-      <div>
-        <h2>Tasks</h2>
-        <button onClick={addingTaskHandler}>Add Task {'+'}</button>
+      <div className="project_messages">
+        <div>
+          <h2>Messages</h2>
+          <div className="message_list">
+            {props.messages.map((elm) => (
+              <p>
+                {elm[0]}: {elm[1]}
+              </p>
+            ))}
+          </div>
+          <div>
+            <textarea
+              placeholder="Message"
+              rows="3"
+              cols="50"
+              id="message"
+              ref={messageInputRef}
+            />
+          </div>
+          <button className="btn" onClick={addMessageHandler}>
+            Add Message
+          </button>
+        </div>
       </div>
-      <div>
-        {addingTask && (
-          <NewTask
-            onAddTask={addTaskHandler}
-            currProj={props.currProj}
-          />
-        )}
+      <div className="project_tasks">
+        <div>
+          <h2>Tasks</h2>
+          <button onClick={addingTaskHandler}>Add Task {"+"}</button>
+        </div>
+        <div>
+          {addingTask && (
+            <NewTask onAddTask={addTaskHandler} currProj={props.currProj} />
+          )}
+        </div>
+        <div>
+          <TaskList tasks={loadedTasks} />
+        </div>
+        <button className="btn" onClick={closeModalHandler}>
+          Close Modal
+        </button>
       </div>
-      <div>
-        <TaskList tasks={loadedTasks} />
-      </div>
-      <button className="btn btn--alt">Do Something</button>
-      <button className="btn" onClick={closeModalHandler}>
-        Close Modal
-      </button>
     </div>
-  )
+  );
 }
 export default ProjectDetails;

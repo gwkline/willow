@@ -280,14 +280,19 @@ textarea {
 
 .proj-details {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 3px;
   background-color: white;
   padding: 1rem;
   text-align: center;
   z-index: 10;
-  top: 20vh;
-  width: 80%;
+  top: 10px;
+  left: calc(50% - 45rem);
+  width: 90rem;
+
   position: fixed;
+  height: 690px;
+  overflow-y: auto;
+
 }
 
 .addTaskForm {
@@ -312,3 +317,31 @@ textarea {
   display: inline-flex;
   justify-content: space-between;
 }
+.project_messages {
+  display:inline-block;
+  width: 45%;
+  margin: 2.5%;
+
+}
+
+.message_list {
+  text-align: left;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align:justify;
+  border-style: solid;
+
+}
+
+.project_header {
+  display:inline-block;
+  width: 45%;
+  text-align: top;
+  margin: 2.5%;
+}
+
