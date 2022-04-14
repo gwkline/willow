@@ -94,7 +94,6 @@ function ProjectDetails(props) {
     const db = getDatabase();
     props.messages.push([user.email, message]);
     set(ref(db, "projects/" + props.currProj + "/messages"), props.messages);
-    alert("Message delivered");
   }
 
   function changeDetailsHandler() {
