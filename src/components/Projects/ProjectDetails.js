@@ -98,9 +98,11 @@ function ProjectDetails(props) {
         <div>
           <h1>{props.title}</h1>
           <p>{props.description}</p>
+        </div>
+        <div>
           <div>
             <textarea
-              placeholder="Message"
+              placeholder="New Title"
               rows="1"
               cols="30"
               id="message"
@@ -109,7 +111,7 @@ function ProjectDetails(props) {
           </div>
           <div>
             <textarea
-              placeholder="Message"
+              placeholder="New Description"
               rows="3"
               cols="50"
               id="message"
@@ -146,7 +148,7 @@ function ProjectDetails(props) {
           </button>
         </div>
       </div>
-      <div>
+      <div className="project_tasks">
         <div>
           <h2>Tasks</h2>
           <button onClick={addingTaskHandler}>Add Task {"+"}</button>

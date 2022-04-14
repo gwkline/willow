@@ -275,15 +275,18 @@ textarea {
 
 .proj-details {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 3px;
   background-color: white;
   padding: 1rem;
   text-align: center;
   z-index: 10;
-  top: 10vh;
-  left: calc(50% - 40rem);
-  width: 80rem;
+  top: 10px;
+  left: calc(50% - 45rem);
+  width: 90rem;
   position: fixed;
+  height: 690px;
+  overflow-y: auto;
+
 }
 
 .addTaskForm {
