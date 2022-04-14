@@ -10,7 +10,8 @@ body {
   background-color: #eeeeee;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: #2f3e46;
 }
 
@@ -135,6 +136,7 @@ label {
   align-items: center;
   justify-content: center;
 }
+
 .dashboard__container {
   display: flex;
   flex-direction: column;
@@ -142,6 +144,7 @@ label {
   background-color: #dcdcdc;
   padding: 30px;
 }
+
 .dashboard__btn {
   padding: 10px;
   font-size: 18px;
@@ -150,6 +153,7 @@ label {
   color: white;
   background-color: black;
 }
+
 .dashboard div {
   margin-top: 7px;
 }
@@ -161,6 +165,7 @@ label {
   align-items: center;
   justify-content: center;
 }
+
 .login__container {
   display: flex;
   flex-direction: column;
@@ -168,11 +173,13 @@ label {
   background-color: #dcdcdc;
   padding: 30px;
 }
+
 .login__textBox {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 .login__btn {
   padding: 10px;
   font-size: 18px;
@@ -181,9 +188,11 @@ label {
   color: white;
   background-color: black;
 }
+
 .login__google {
   background-color: #4285f4;
 }
+
 .login div {
   margin-top: 7px;
 }
@@ -195,6 +204,7 @@ label {
   align-items: center;
   justify-content: center;
 }
+
 .register__container {
   display: flex;
   flex-direction: column;
@@ -202,11 +212,13 @@ label {
   background-color: #dcdcdc;
   padding: 30px;
 }
+
 .register__textBox {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 .register__btn {
   padding: 10px;
   font-size: 18px;
@@ -215,9 +227,11 @@ label {
   color: white;
   background-color: black;
 }
+
 .register__google {
   background-color: #4285f4;
 }
+
 .register div {
   margin-top: 7px;
 }
@@ -229,6 +243,7 @@ label {
   align-items: center;
   justify-content: center;
 }
+
 .reset__container {
   display: flex;
   flex-direction: column;
@@ -236,11 +251,13 @@ label {
   background-color: #dcdcdc;
   padding: 30px;
 }
+
 .reset__textBox {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 .reset__btn {
   padding: 10px;
   font-size: 18px;
@@ -249,6 +266,7 @@ label {
   color: white;
   background-color: black;
 }
+
 .reset div {
   margin-top: 7px;
 }
@@ -265,7 +283,15 @@ label {
   display: inline-flex;
 }
 
+.assigneeSelect {
+  display: inline-flex;
+}
+
 .statusDropdown {
+  margin-left: 5px;
+}
+
+.assigneeDropdown {
   margin-left: 5px;
 }
 

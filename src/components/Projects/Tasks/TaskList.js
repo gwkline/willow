@@ -1,16 +1,15 @@
 import Task from "./Task";
 
 function TaskList(props) {
-  console.log(props.tasks)
   return (
     <>
-    <div className="tasklist-header">
-      <h3>Name:</h3>
-      <h3>Description:</h3>
-      <h3>Assignee:</h3>
-      <h3>Status:</h3>
-    </div>
-      
+      <div className="tasklist-header">
+        <h3>Name:</h3>
+        <h3>Description:</h3>
+        <h3>Assignee:</h3>
+        <h3>Status:</h3>
+      </div>
+
       <ul className="tasklist">
         {props.tasks.map((task) => (
           <Task
@@ -23,7 +22,7 @@ function TaskList(props) {
         ))}
       </ul>
     </>
-    
+
   );
 }
 
