@@ -60,7 +60,9 @@ function ProjectItem(props) {
         }
 
         else {
-          console.log("Project owner is not the same as the current user, not deleting project")
+          if (projects[project].key === props.id) {
+            alert("You must be the owner of a project to delete it");
+          }
         }
 
       }

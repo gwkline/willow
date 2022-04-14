@@ -2,14 +2,11 @@ import { useRef } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 function Task(props) {
-    console.log(props.taskKey);
-
     const taskAssigneeRef = useRef();
 
     const assigneeOptions = getProjMembers(props);
 
     function getProjMembers(props) {
-        console.log(Object.keys(props))
         let db = getDatabase();
         let userRef = ref(db, 'users');
         let members = [];
@@ -22,7 +19,6 @@ function Task(props) {
             for (let projectID in data) {
                 if (data[projectID].tasks) {
                     if (Object.keys(data[projectID].tasks).includes(props.taskKey)) {
-                        console.log("FOUND IT")
                         thisProj = projectID
                     }
                 }
@@ -52,12 +48,12 @@ function Task(props) {
             <p>{props.description}</p>
 
             <div className="statusSelect">
-              <label>Assigned To:</label>
-              <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" id="assignee">
-                  {assigneeOptions.map(item => {
-                      return (<option key={item} value={item}>{item}</option>);
-                  })}
-              </select>
+                <label>Assigned To:</label>
+                <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" id="assignee">
+                    {assigneeOptions.map(item => {
+                        return (<option key={item} value={item}>{item}</option>);
+                    })}
+                </select>
             </div>
 
             <div className="statusSelect">
