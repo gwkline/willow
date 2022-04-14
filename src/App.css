@@ -280,9 +280,9 @@ textarea {
   padding: 1rem;
   text-align: center;
   z-index: 10;
-  top: 20vh;
-  left: calc(50% - 15rem);
-  width: 50rem;
+  top: 10vh;
+  left: calc(50% - 40rem);
+  width: 80rem;
   position: fixed;
 }
 
@@ -301,4 +301,32 @@ textarea {
   display: inline-flex;
   justify-content: space-around;
   padding-left: 10px;
+}
+
+.project_messages {
+  display:inline-block;
+  width: 45%;
+  margin: 2.5%;
+
+}
+
+.message_list {
+  text-align: left;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align:justify;
+  border-style: solid;
+
+}
+
+.project_header {
+  display:inline-block;
+  width: 45%;
+  text-align: top;
+  margin: 2.5%;
 }
