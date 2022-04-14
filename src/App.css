@@ -283,6 +283,7 @@ textarea {
   top: 10px;
   left: calc(50% - 45rem);
   width: 90rem;
+
   position: fixed;
   height: 690px;
   overflow-y: auto;

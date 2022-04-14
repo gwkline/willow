@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, get } from "firebase/database";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TaskList from "./Tasks/TaskList";
@@ -19,28 +19,30 @@ function ProjectDetails(props) {
   const descriptionInputRef = useRef();
 
   useEffect(() => {
-    // let projectTaskArray = [];
     setIsLoading(true);
     const db = getDatabase();
-    const taskRef = ref(db, "projects" + "/" + props.currProj);
+
+    const taskRef = ref(db, 'projects/' + props.currProj);
 
     onValue(taskRef, (snapshot) => {
       const data = snapshot.val();
       const tasks = [];
       for (const taskID in data.tasks) {
-        console.log(taskID);
-        const task = {
-          key: taskID,
-          ...data.tasks[taskID],
-        };
 
-        tasks.push(task);
+        if (taskID !== "0") {
+          const task = {
+            key: taskID,
+            ...data.tasks[taskID]
+          };
+
+          tasks.push(task);
+        }
       }
 
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, [user, navigate]);
+  }, [user, navigate, props.currProj]);
 
   if (isLoading) {
     return (
@@ -65,12 +67,20 @@ function ProjectDetails(props) {
       assigned_to: props.assigned_to,
       status: props.status,
     };
-    set(
-      ref(db, "projects/" + props.currProj + "/tasks/" + unique_id),
-      taskToAdd
-    );
+
+    set(ref(db, 'projects/' + props.currProj + '/tasks/' + unique_id), taskToAdd)
     isAddingTask(false);
     props.curTask = taskToAdd;
+
+    get(ref(db, 'projects/' + props.currProj + '/tasks/')).then((snapshot) => {
+      const data = snapshot.val();
+      for (let task in data) {
+        if (task === "0" || task === 0) {
+          console.log("FOUND ONE")
+          set(ref(db, 'projects/' + props.currProj + '/tasks/' + task), null)
+        }
+      }
+    });
   }
 
   function addMessageHandler() {
