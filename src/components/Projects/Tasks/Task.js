@@ -1,15 +1,12 @@
 import { useRef } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set } from "firebase/database";
 
 function Task(props) {
-    console.log(props.taskKey);
-
     const taskAssigneeRef = useRef();
 
     const assigneeOptions = getProjMembers(props);
 
     function getProjMembers(props) {
-        console.log(Object.keys(props))
         let db = getDatabase();
         let userRef = ref(db, 'users');
         let members = [];
@@ -22,7 +19,6 @@ function Task(props) {
             for (let projectID in data) {
                 if (data[projectID].tasks) {
                     if (Object.keys(data[projectID].tasks).includes(props.taskKey)) {
-                        console.log("FOUND IT")
                         thisProj = projectID
                     }
                 }
@@ -44,6 +40,40 @@ function Task(props) {
         return members;
     }
 
+    //deletes the task passed in props
+    function deleteTask() {
+        let db = getDatabase();
+        let projectRef = ref(db, 'projects');
+        for (let projectID in projectRef) {
+            if (projectRef[projectID].tasks) {
+                if (Object.keys(projectRef[projectID].tasks).includes(props.taskKey)) {
+                    set(ref(db, 'projects/' + projectID + '/tasks/' + props.taskKey), null);
+                }
+            }
+        }
+    }
+
+    //updates the task passed in props
+    function updateTask() {
+        let db = getDatabase();
+        let projectRef = ref(db, 'projects');
+        for (let projectID in projectRef) {
+            if (projectRef[projectID].tasks) {
+                if (Object.keys(projectRef[projectID].tasks).includes(props.taskKey)) {
+
+                    let newTask = {
+                        key: props.taskKey,
+                        name: props.name,
+                        description: props.description,
+                        assigned_to: props.assigned_to,
+                        status: props.status,
+                    }
+                    set(ref(db, 'projects/' + projectID + '/tasks/' + props.taskKey), newTask);
+                }
+            }
+        }
+    }
+
 
 
     return (
@@ -51,11 +81,13 @@ function Task(props) {
             <p>{props.name}</p>
             <p>{props.description}</p>
             <div className="statusSelect">
+
               <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" id="assignee">
                   {assigneeOptions.map(item => {
                       return (<option key={item} value={item}>{item}</option>);
                   })}
               </select>
+
             </div>
             <div className="statusSelect">
                 <select className="statusDropdown" name="statusDropdown" id="status">
