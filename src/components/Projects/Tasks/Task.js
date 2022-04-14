@@ -85,8 +85,7 @@ function Task(props) {
             <p>{props.name}</p>
             <p>{props.description}</p>
             <div className="statusSelect">
-
-                <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" onChange={updateTask} id="assignee">
+                <select className="statusDropdown" defaultValue={props.assigned_to} ref={taskAssigneeRef} name="assigneeDropdown" onChange={updateTask} id="assignee">
                     {assigneeOptions.map(item => {
                         return (<option key={item} value={item}>{item}</option>);
                     })}
