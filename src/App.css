@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+  color: #2f3e46;
+}
+
 body {
   margin: 3rem;
   background-color: #eeeeee;
@@ -60,7 +65,7 @@ h1, h2 {
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
-  width: 20rem;
+  width: 40%;
 }
 
 footer {
@@ -300,4 +305,10 @@ textarea {
   display: inline-flex;
   justify-content: space-around;
   padding-left: 10px;
+}
+
+.homepagecontents {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
 }
