@@ -1,5 +1,5 @@
-Willow Project Manager
-CIS 454 - Group 2
+Willow Project Manager \n
+CIS 454 - Group 2 \n
 Liam Hannah, Gavin Kline, Steven Liu, Kevin Sullivan
 
 
