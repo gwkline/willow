@@ -99,6 +99,10 @@ function ProjectDetails(props) {
   function changeDetailsHandler() {
     const newTitle = titleInputRef.current.value;
     const newDescription = descriptionInputRef.current.value;
+    if (newTitle === "" || newDescription === "") {
+      alert("Please fill out all fields");
+      return;
+    }
     const db = getDatabase();
     set(ref(db, "projects/" + props.currProj + "/title"), newTitle);
     set(ref(db, "projects/" + props.currProj + "/description"), newDescription);
