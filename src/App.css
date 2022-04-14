@@ -363,3 +363,8 @@ textarea {
   text-align: top;
   margin: 2.5%;
 }
+
+/* Solid border */
+hr.solid {
+  border-top: 3px solid #bbb;
+}

@@ -9,6 +9,7 @@ function TaskList(props) {
         <h3>Description:</h3>
         <h3>Assignee:</h3>
         <h3>Status:</h3>
+        <h3>Delete:</h3>
       </div>
 
       <ul className="tasklist">
