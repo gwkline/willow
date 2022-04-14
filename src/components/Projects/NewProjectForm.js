@@ -22,7 +22,7 @@ function NewProjectForm(props) {
       title: enteredTitle,
       description: enteredDescription,
       owner: user_id,
-      messages: [["Name", "Description"]],
+      messages: [["Name", "Message"]],
       tasks: [""],
     };
 

@@ -39,8 +39,6 @@ function NewTask(props) {
         const userRef = ref(db, 'users');
         const members = [];
 
-
-
         onValue(userRef, (snapshot) => {
             const data = snapshot.val();
             for (const userObj in data) {
@@ -52,7 +50,6 @@ function NewTask(props) {
         })
         return members;
     }
-
 
     function closeAddTask() {
         isAddingTask(false);
