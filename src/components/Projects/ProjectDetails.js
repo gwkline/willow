@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { getDatabase, ref, set, onValue, get } from "firebase/database";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import TaskList from "./Tasks/TaskList";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";

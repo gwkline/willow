@@ -12,11 +12,12 @@ function InviteMember(props) {
     };
 
     props.onInvite(data);
-    alert("Member invited");
+    
   }
 
   function closeModalHandler() {
     props.onClose();
+    alert("Member invited");
   }
 
   return (
