@@ -14,12 +14,12 @@ function ProjectDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedTasks, setLoadedTasks] = useState([]);
   const [addingTask, isAddingTask] = useState(false);
-  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const messageInputRef = useRef();
 
 
   useEffect(() => {
+    console.log("projectDetails.js: useEffect");
     setIsLoading(true);
     const db = getDatabase();
     const taskRef = ref(db, 'projects/' + props.currProj);
@@ -41,7 +41,7 @@ function ProjectDetails(props) {
       setLoadedTasks(tasks);
       setIsLoading(false);
     });
-  }, [user, navigate, props.currProj]);
+  }, [user, props.currProj]);
 
   if (isLoading) {
     return (
@@ -126,6 +126,7 @@ function ProjectDetails(props) {
         {addingTask && (
           <NewTask
             onAddTask={addTaskHandler}
+            onClose={closeModalHandler}
             currProj={props.currProj}
           />
         )}

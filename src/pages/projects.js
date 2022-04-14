@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, get } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
@@ -18,6 +18,7 @@ function Projects() {
 
 
   useEffect(() => {
+    console.log("projects.js: useEffect");
     let userProjectArray = [];
     setIsLoading(true);
     const db = getDatabase();
@@ -26,7 +27,7 @@ function Projects() {
 
     //Check if the current user's project list has changed
     //if so, add it to the projects array
-    onValue(userRef, (snapshot) => {
+    get(userRef, (snapshot) => {
       const data = snapshot.val();
       if (user == null) {
         return;
@@ -47,7 +48,7 @@ function Projects() {
 
     })
 
-    onValue(projectRef, (snapshot) => {
+    get(projectRef, (snapshot) => {
       const data = snapshot.val();
       const projects = []
       for (const projectID in data) {

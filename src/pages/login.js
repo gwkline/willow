@@ -24,6 +24,7 @@ function Login() {
     navigate("/")
   };
   useEffect(() => {
+    console.log("login.js: useEffect");
     if (loading) return;
     if (user) navigate("/");
   }, [user, loading, navigate]);
@@ -48,7 +49,7 @@ function Login() {
         <button className="login__btn" onKeyDown={handleKeyDown} onClick={login}>
           Login
         </button>
-        <button className="login__btn login__google"onClick={signInWithGoogle}>
+        <button className="login__btn login__google" onClick={signInWithGoogle}>
           Login with Google
         </button>
         <div>

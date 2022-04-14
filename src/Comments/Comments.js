@@ -52,6 +52,7 @@ const Comments = ({ commentsUrl, currentUserId }) => {
   };
 
   useEffect(() => {
+    console.log("Comments.js: useEffect");
     getCommentsApi().then((data) => {
       setBackendComments(data);
     });
