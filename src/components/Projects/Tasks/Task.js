@@ -86,7 +86,7 @@ function Task(props) {
             <p>{props.description}</p>
             <div className="statusSelect">
 
-                <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" id="assignee">
+                <select className="statusDropdown" ref={taskAssigneeRef} name="assigneeDropdown" onChange={updateTask} id="assignee">
                     {assigneeOptions.map(item => {
                         return (<option key={item} value={item}>{item}</option>);
                     })}
@@ -94,7 +94,7 @@ function Task(props) {
 
             </div>
             <div className="statusSelect">
-                <select defaultValue={props.status} ref={taskStatusRef} className="statusDropdown" name="statusDropdown" id="status">
+                <select defaultValue={props.status} ref={taskStatusRef} className="statusDropdown" name="statusDropdown" onChange={updateTask} id="status">
                     <option value="new">New</option>
                     <option value="in_progress">In Progress</option>
                     <option value="complete">Complete</option>
@@ -102,7 +102,6 @@ function Task(props) {
             </div>
             <div style={{ display: 'flex' }}>
                 <button onClick={deleteTask}>X</button>
-                <button onClick={updateTask}>⟳</button>
             </div>
         </div>
     )
