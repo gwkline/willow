@@ -28,7 +28,7 @@ function ProjectDetails(props) {
       const data = snapshot.val();
       const tasks = []
       for (const taskID in data.tasks) {
-        if (taskID != "0") {
+        if (taskID !== "0") {
           const task = {
             key: taskID,
             ...data.tasks[taskID]
