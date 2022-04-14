@@ -51,8 +51,6 @@ function ProjectDetails(props) {
     );
   }
 
-
-
   function closeModalHandler() {
     props.onClose();
   }

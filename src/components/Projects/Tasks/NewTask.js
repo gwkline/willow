@@ -56,10 +56,11 @@ function NewTask(props) {
 
     function closeAddTask() {
         isAddingTask(false);
+
     }
 
     return (
-        <form onSubmit={submitHandler} className="addTaskForm">
+        <form className="addTaskForm">
             <label>Name: </label>
             <input type="text" ref={taskNameRef} />
             <label>Description: </label>
@@ -76,7 +77,7 @@ function NewTask(props) {
                 <option value="in_progress">In Progress</option>
                 <option value="complete">Completed</option>
             </select>
-            <button>Add</button>
+            <button onClick={submitHandler}>Add</button>
             <button onClick={closeAddTask}>Cancel</button>
         </form>
 
