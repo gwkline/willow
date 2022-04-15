@@ -1,12 +1,10 @@
 import { useState } from "react";
 import ProjectDetails from "./ProjectDetails";
 import Backdrop from "../Backdrop";
-import { getDatabase, ref, update, onValue, set, get } from "firebase/database";
+import { getDatabase, ref, update, set, get } from "firebase/database";
 import InviteMember from "./InviteMember";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
-// import LeaveProject from "./LeaveProject";
-// import ProjectList from "./ProjectList";
 
 
 
@@ -29,24 +27,36 @@ function ProjectItem(props) {
   function deleteHandler() {
 
     const db = getDatabase();
-    const updates = {};
     const projectRef = ref(db, 'projects');
     const userRef = ref(db, 'users');
 
     get(projectRef).then((snapshot) => {
-      const projects = snapshot.val();
+      const projects = snapshot.val()
+
+      //for each project in the database
       for (let project in projects) {
+
+        //if this project is the project to be deleted
         if (project === props.projKey) {
+
+          //if the project owner is the current user
           if (projects[project].owner === user.uid) {
-            console.log("NICE")
+
+
             get(userRef).then((snapshot) => {
               const data = snapshot.val();
+
+              //for each user in the database
               for (let userID in data) {
+
+                //for each project in the user's project list
                 for (let thisProject in data[userID].projects) {
+
+                  //check if this project is the project to be deleted
                   if (thisProject === props.projKey) {
-                    set(ref(db, 'users/' + userID + '/projects/' + props.projKey), null)
-                    updates['/projects/' + props.projKey] = null;
-                    update(ref(db), updates);
+                    update(ref(db, 'users/' + userID + '/projects/'), {
+                      [props.id]: null
+                    })
                     return
                   }
                 }
@@ -54,7 +64,7 @@ function ProjectItem(props) {
             })
           }
           else {
-              alert("You must be the owner of a project to delete it");
+            alert("You must be the owner of a project to delete it");
           }
         }
       }
@@ -69,7 +79,7 @@ function ProjectItem(props) {
   function addMember(email) {
     const db = getDatabase();
     const userRef = ref(db, 'users');
-    onValue(userRef, (snapshot) => {
+    get(userRef).then((snapshot) => {
       const data = snapshot.val();
       for (let userID in data) {
         if (data[userID].email === email.email) {
@@ -88,12 +98,11 @@ function ProjectItem(props) {
 
   function leaveProjectHandler() {
     const db = getDatabase();
-    const updates = {};
-    updates['/users/' + user.uid + `/projects/` + props.currProj] = null;
-    update(ref(db), updates);
-    alert("Successfully left the project");
-    return update(ref(db), updates);
+    update(ref(db, 'users/' + user.uid + '/projects/'), {
+      [props.id]: null
+    })
   }
+
 
   return (
     <>
