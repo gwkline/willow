@@ -1,6 +1,5 @@
 import React from "react";
 import leaf from "../images/leaf.png";
-import Comments from "../Comments/Comments";
 
 function Home() {
   return (

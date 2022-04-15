@@ -82,8 +82,11 @@ function ProjectDetails(props) {
       const data = snapshot.val();
       for (let task in data) {
         if (task === "0" || task === 0) {
-          console.log("FOUND ONE")
-          set(ref(db, 'projects/' + props.currProj + '/tasks/' + task), null)
+          //console.log("FOUND ONE")
+          //set(ref(db, 'projects/' + props.currProj + '/tasks/' + task), null)
+          update(ref(db, 'projects/' + props.currProj + '/tasks/'), {
+            [task]: null
+          })
         }
       }
     });
@@ -120,15 +123,15 @@ function ProjectDetails(props) {
             titleInputRef.current.value = "";
             descriptionInputRef.current.value = "";
             alert("Project details have been edited");
-          } 
-        
+          }
+
           else {
-              alert("You must be the owner of a project to edit it");
+            alert("You must be the owner of a project to edit it");
           }
         }
       }
     });
-  
+
   }
 
   function addingTaskHandler() {

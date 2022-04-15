@@ -52,6 +52,7 @@ function NewTask(props) {
     }
 
     function closeAddTask() {
+        console.log("closeAddTask");
         isAddingTask(false);
         return () => {
             isAddingTask(true);

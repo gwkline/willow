@@ -1,6 +1,4 @@
 import React from "react";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { deleteUser } from "firebase/auth";
 
 function testAlert() {
   alert("This feature is still in testing");
@@ -27,7 +25,7 @@ function Settings() {
       <button className="more_pref_btn" onClick={testAlert}>
         View
       </button>
-      
+
     </div>
 
   );
