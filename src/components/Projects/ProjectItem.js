@@ -54,10 +54,10 @@ function ProjectItem(props) {
 
                   //check if this project is the project to be deleted
                   if (thisProject === props.projKey) {
+                    console.log(userID)
                     update(ref(db, 'users/' + userID + '/projects/'), {
                       [props.id]: null
                     })
-                    return
                   }
                 }
               }
