@@ -18,7 +18,7 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC_Gh13Kj7XpYUJ77u-P6Rm_mluMSldj2s",
+    apiKey: process.env.REACT_APP_FIREBASE_API,
     authDomain: "cis-454-group-2.firebaseapp.com",
     databaseURL: "https://cis-454-group-2-default-rtdb.firebaseio.com",
     projectId: "cis-454-group-2",
