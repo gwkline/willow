@@ -92,6 +92,8 @@ function ProjectDetails(props) {
     isAddingTask(true);
   }
 
+  
+
   return (
     <div className="proj-details">
       <div className="project_header">
